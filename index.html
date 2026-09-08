@@ -1,0 +1,1530 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BTech CSE Academic & Engineering Roadmap | RGPV University</title>
+    <meta name="description" content="Comprehensive 4-year BTech Computer Science & Engineering curriculum, learning path, PYQs, and analytics dashboard for RGPV University (Sushila Devi Bansal College, Indore).">
+    
+    <!-- Google Fonts: Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- External CSS stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Chart.js CDN for Analytics Dashboard -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <!-- NAV HEADER -->
+    <header class="navbar">
+        <div class="navbar-content">
+            <a href="#" class="brand-logo">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                <span>RGPV BTech CSE Roadmap</span>
+                <span class="brand-badge">2026 Batch</span>
+            </a>
+
+            <!-- NAV TABS -->
+            <div class="nav-tabs">
+                <button class="tab-btn active" onclick="switchTab('curriculum')">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    Roadmap & Curriculum
+                </button>
+                <button class="tab-btn" onclick="switchTab('dashboard')">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2h-12a2 2 0 00-2-2z"></path></svg>
+                    Analytics Dashboard
+                </button>
+            </div>
+
+            <!-- ACTIONS -->
+            <div class="nav-actions">
+                <button class="btn-icon" onclick="toggleTheme()" id="themeToggleBtn">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    <span id="themeBtnText">Light Mode</span>
+                </button>
+                <button class="btn-outline" onclick="resetProgress()">Reset Progress</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="app-container">
+
+        <!-- LANDING HERO SECTION -->
+        <section class="hero-section">
+            <div class="hero-college-badge">
+                <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5m3 0h1m-1-4h.01M9 16h.01M9 12h.01M9 8h.01M15 16h.01M15 12h.01M15 8h.01"></path></svg>
+                <span>Sushila Devi Bansal College, Indore • <strong>RGPV University Bhopal</strong></span>
+            </div>
+
+            <h1 class="hero-title">From Zero to Job-Ready Software Engineer</h1>
+            
+            <p class="hero-desc">
+                An in-depth 4-year engineering roadmap designed specifically to bridge foundational basics, clear college academics with RGPV PYQs, master core computer science, and build placement-ready software development skills.
+            </p>
+
+            <div class="hero-stats-row">
+                <div class="hero-stat-pill">
+                    <span class="hero-stat-value">8</span>
+                    <span class="hero-stat-label">Semesters</span>
+                </div>
+                <div class="hero-stat-pill">
+                    <span class="hero-stat-value">50+</span>
+                    <span class="hero-stat-label">RGPV Courses</span>
+                </div>
+                <div class="hero-stat-pill">
+                    <span class="hero-stat-value">250+</span>
+                    <span class="hero-stat-label">Curated Free Resources</span>
+                </div>
+                <div class="hero-stat-pill">
+                    <span class="hero-stat-value">PYQs</span>
+                    <span class="hero-stat-label">RGPV Papers Included</span>
+                </div>
+            </div>
+
+            <div class="motivation-card">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                <div>
+                    <strong>Focus on Consistency:</strong> Past academic challenges do not define your engineering journey. What matters is executing daily study discipline, solving RGPV previous year papers, understanding core computer science concepts deeply, and completing one milestone at a time.
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 1: CURRICULUM ROADMAP VIEW -->
+        <!-- ========================================== -->
+        <div id="pane-curriculum" class="tab-pane active">
+
+            <!-- SEARCH AND FILTER TOOLBAR -->
+            <div class="toolbar">
+                <div class="search-box">
+                    <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Search subjects, PYQs, codes, topics..." onkeyup="filterSubjects()">
+                    <span class="kbd-shortcut">Ctrl + K</span>
+                </div>
+
+                <div class="filter-group">
+                    <button class="filter-chip active" onclick="setFilter('all', this)">All Semesters</button>
+                    <button class="filter-chip" onclick="setFilter('pre', this)">Pre-Basics</button>
+                    <button class="filter-chip" onclick="setFilter('year1', this)">Year 1 (Sem 1-2)</button>
+                    <button class="filter-chip" onclick="setFilter('year2', this)">Year 2 (Sem 3-4)</button>
+                    <button class="filter-chip" onclick="setFilter('year3', this)">Year 3 (Sem 5-6)</button>
+                    <button class="filter-chip" onclick="setFilter('year4', this)">Year 4 (Sem 7-8)</button>
+                    <button class="filter-chip" onclick="setFilter('cc', this)">Co-Curriculars</button>
+                </div>
+            </div>
+
+            <!-- SEMESTER ACCORDION LIST -->
+            <div class="semester-container" id="semesterContainer">
+
+                <!-- PRE-BASICS BLOCK -->
+                <div class="semester-block" data-sem="pre" data-year="pre">
+                    <div class="semester-header-bar" onclick="toggleBlock(this)">
+                        <div class="semester-title-group">
+                            <span class="sem-badge">PRE</span>
+                            <div>
+                                <div class="sem-name">Pre-BTech Fundamentals & Bridge Modules</div>
+                                <div class="sem-meta">Essential prerequisite topics in mathematics, physics, chemistry, basic computer operation, and communication</div>
+                            </div>
+                        </div>
+                        <div class="sem-progress-info">
+                            <div class="sem-progress-bar-container">
+                                <div class="sem-progress-bar-fill" id="progress-fill-pre" style="width: 0%;"></div>
+                            </div>
+                            <span class="sem-percentage" id="progress-pre">0/17 (0%)</span>
+                            <svg class="toggle-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                    </div>
+
+                    <div class="subjects-container">
+                        <!-- Pre 1 -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">MATH-001</span>
+                                        <span class="tag-pill tag-foundation">Foundation</span>
+                                    </div>
+                                    <div class="subject-name">Basic Mathematics & Algebra (10th-12th Refresh)</div>
+                                    <div class="subject-desc">Algebraic equations, trigonometry identities, coordinate geometry, and fundamental calculus.</div>
+                                </div>
+                            </div>
+                            <div class="resource-group">
+                                <a href="https://www.khanacademy.org/math/algebra" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>Khan Academy Algebra</a>
+                                <a href="https://www.youtube.com/playlist?list=PLGBUuRzTQyURVUWzrEV4IrJkfnOBFqAKd" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Trigonometry Hindi Lectures</a>
+                                <a href="https://www.youtube.com/playlist?list=PLqjFFrfKcY5z0ZJZ-gmj87bMaNvuxEyv8" target="_blank" class="resource-tag tag-alt"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Alt: Mathematically Inclined</a>
+                                <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>3Blue1Brown Visual Math</a>
+                            </div>
+                            <div class="checklist-group" data-group="pre">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="pre-1" onchange="updateAllProgress()"><span class="check-label">Basic Algebra — Variables, Linear & Quadratic Equations</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="pre-2" onchange="updateAllProgress()"><span class="check-label">Trigonometry — Identities, sin/cos/tan & graphs</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="pre-3" onchange="updateAllProgress()"><span class="check-label">Coordinate Geometry — Lines, Circles, Parabola</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="pre-4" onchange="updateAllProgress()"><span class="check-label">Limits & Basic Differentiation</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="pre-5" onchange="updateAllProgress()"><span class="check-label">Basic Integration Concepts</span></label>
+                            </div>
+                        </div>
+
+                        <!-- Pre 2 -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">PHYS-001</span>
+                                        <span class="tag-pill tag-foundation">Foundation</span>
+                                    </div>
+                                    <div class="subject-name">Basic Physics & Chemistry Bridge</div>
+                                    <div class="subject-desc">Units, mechanics fundamentals, basic electricity, atomic structure, and chemical bonding.</div>
+                                </div>
+                            </div>
+                            <div class="resource-group">
+                                <a href="https://www.khanacademy.org/science/physics" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>Khan Academy Physics</a>
+                                <a href="https://www.youtube.com/playlist?list=PL0o_zxa4K1BU6wPPLDsoTj1_wEf0LSNeR" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Organic Chemistry Tutor</a>
+                                <a href="https://www.youtube.com/playlist?list=PLF_7kfnwLFCEbuqbwU9hyghx5vHpaBPRo" target="_blank" class="resource-tag tag-alt"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Alt: Physics Wallah Basics</a>
+                            </div>
+                            <div class="checklist-group" data-group="pre">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="pre-6" onchange="updateAllProgress()"><span class="check-label">Units & Measurement Systems</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="pre-7" onchange="updateAllProgress()"><span class="check-label">Newton's Laws of Motion & Basic Mechanics</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="pre-8" onchange="updateAllProgress()"><span class="check-label">Basic Electricity & Electrical Circuits</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="pre-9" onchange="updateAllProgress()"><span class="check-label">Atomic Structure & Chemical Bonding</span></label>
+                            </div>
+                        </div>
+
+                        <!-- Pre 3 -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">CS-001</span>
+                                        <span class="tag-pill tag-coding">Computer Setup</span>
+                                    </div>
+                                    <div class="subject-name">Computer Setup & Algorithmic Fundamentals</div>
+                                    <div class="subject-desc">Touch typing, IDE configuration, write your first code, and understand algorithms.</div>
+                                </div>
+                            </div>
+                            <div class="resource-group">
+                                <a href="https://cs50.harvard.edu/x/" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>Harvard CS50 Course</a>
+                                <a href="https://www.typingclub.com/" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>TypingClub Practice</a>
+                                <a href="https://www.youtube.com/playlist?list=PLhzIaPMgkbxAx_yWA4zH3Jl5CeATxEjbM" target="_blank" class="resource-tag tag-alt"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Alt: Anuj Bhaiya Coding Basics</a>
+                            </div>
+                            <div class="checklist-group" data-group="pre">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="pre-10" onchange="updateAllProgress()"><span class="check-label">Touch Typing Practice (Target 40 WPM)</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="pre-11" onchange="updateAllProgress()"><span class="check-label">Install VS Code & Configure Compiler</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="pre-12" onchange="updateAllProgress()"><span class="check-label">Write First "Hello World" Program in C</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="pre-13" onchange="updateAllProgress()"><span class="check-label">Understand Algorithmic Thinking & Flowcharts</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="pre-14" onchange="updateAllProgress()"><span class="check-label">Start CS50 Week 0 (Scratch / Logic)</span></label>
+                            </div>
+                        </div>
+
+                        <!-- Pre 4 -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">ENG-001</span>
+                                        <span class="tag-pill tag-foundation">Communication</span>
+                                    </div>
+                                    <div class="subject-name">English & Professional Communication</div>
+                                    <div class="subject-desc">Technical writing, reading comprehension, vocabulary, and paragraph structure.</div>
+                                </div>
+                            </div>
+                            <div class="resource-group">
+                                <a href="https://www.duolingo.com/" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>Duolingo English</a>
+                                <a href="https://www.grammarly.com/" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>Grammarly Assistant</a>
+                                <a href="https://www.youtube.com/playlist?list=PLhrnHPBcOqMntjH2kZYtvze0RMj5kxmpV" target="_blank" class="resource-tag tag-alt"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Alt: Dear Sir Spoken English</a>
+                            </div>
+                            <div class="checklist-group" data-group="pre">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="pre-15" onchange="updateAllProgress()"><span class="check-label">Read English Tech Articles Daily (10 Mins)</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="pre-16" onchange="updateAllProgress()"><span class="check-label">Watch English Tech Tutorials (with Subtitles)</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="pre-17" onchange="updateAllProgress()"><span class="check-label">Practice Paragraph Writing & Grammar</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SEMESTER 1 BLOCK -->
+                <div class="semester-block" data-sem="sem1" data-year="year1">
+                    <div class="semester-header-bar" onclick="toggleBlock(this)">
+                        <div class="semester-title-group">
+                            <span class="sem-badge">SEM 1</span>
+                            <div>
+                                <div class="sem-name">Semester I — Engineering Foundations</div>
+                                <div class="sem-meta">RGPV First-Year Common Courses + Self-Directed C Programming</div>
+                            </div>
+                        </div>
+                        <div class="sem-progress-info">
+                            <div class="sem-progress-bar-container">
+                                <div class="sem-progress-bar-fill" id="progress-fill-sem1" style="width: 0%;"></div>
+                            </div>
+                            <span class="sem-percentage" id="progress-sem1">0/24 (0%)</span>
+                            <svg class="toggle-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                    </div>
+
+                    <div class="subjects-container">
+                        <!-- BT-201 -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">BT-201</span>
+                                        <span class="tag-pill tag-core">Core Science</span>
+                                    </div>
+                                    <div class="subject-name">Engineering Chemistry</div>
+                                    <div class="subject-desc">Water treatment, high polymers, corrosion engineering, spectroscopic techniques.</div>
+                                </div>
+                            </div>
+                            <div class="resource-group">
+                                <a href="https://www.rgpvonline.com/rgpv-btech-papers.html" target="_blank" class="resource-tag tag-pyq"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>📄 RGPV PYQs (PDFs)</a>
+                                <a href="https://www.youtube.com/playlist?list=PL7IhposCM6bVt3xn0pU8ZjnATp9YsFXOt" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>5 Minute Engg Chemistry</a>
+                                <a href="https://www.youtube.com/playlist?list=PL7IhposCM6bVt3xn0pU8ZjnATp9YsFXOt" target="_blank" class="resource-tag tag-alt"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Alt: Last Moment Tuitions</a>
+                                <a href="https://nptel.ac.in/" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>NPTEL Engg Chemistry</a>
+                            </div>
+                            <div class="checklist-group" data-group="sem1">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s1-1" onchange="updateAllProgress()"><span class="check-label">Water Technology & Industrial Treatment</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s1-2" onchange="updateAllProgress()"><span class="check-label">Polymers & Engineering Materials</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s1-3" onchange="updateAllProgress()"><span class="check-label">Corrosion & Anti-Corrosive Coatings</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s1-4" onchange="updateAllProgress()"><span class="check-label">Spectroscopic Techniques (UV-Vis, IR)</span></label>
+                            </div>
+                        </div>
+
+                        <!-- BT-202 -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">BT-202</span>
+                                        <span class="tag-pill tag-core">Core Math</span>
+                                    </div>
+                                    <div class="subject-name">Mathematics — I</div>
+                                    <div class="subject-desc">Calculus, rank of matrices, linear systems, differential equations.</div>
+                                </div>
+                            </div>
+                            <div class="resource-group">
+                                <a href="https://www.rgpvonline.com/rgpv-btech-papers.html" target="_blank" class="resource-tag tag-pyq"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>📄 RGPV PYQs (PDFs)</a>
+                                <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>3Blue1Brown Calculus</a>
+                                <a href="https://www.youtube.com/playlist?list=PLU6SqdYcYsfLPxjd-k-MaoG7qgRQ-2fKc" target="_blank" class="resource-tag tag-alt"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Alt: Gajendra Purohit Math-I</a>
+                                <a href="https://nptel.ac.in/courses/111104085" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>NPTEL Math I</a>
+                            </div>
+                            <div class="checklist-group" data-group="sem1">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s1-5" onchange="updateAllProgress()"><span class="check-label">Matrix Theory & Linear Systems</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s1-6" onchange="updateAllProgress()"><span class="check-label">Differential Calculus & Rolle's Theorem</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s1-7" onchange="updateAllProgress()"><span class="check-label">Integral Calculus & Definite Integrals</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s1-8" onchange="updateAllProgress()"><span class="check-label">Ordinary Differential Equations (ODE)</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s1-9" onchange="updateAllProgress()"><span class="check-label">Infinite Sequences & Series</span></label>
+                            </div>
+                        </div>
+
+                        <!-- BT-203 -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">BT-203</span>
+                                        <span class="tag-pill tag-foundation">Communication</span>
+                                    </div>
+                                    <div class="subject-name">English for Communication</div>
+                                    <div class="subject-desc">Technical report writing, presentation skills, grammar, and oral communication.</div>
+                                </div>
+                            </div>
+                            <div class="resource-group">
+                                <a href="https://www.rgpvonline.com/rgpv-btech-papers.html" target="_blank" class="resource-tag tag-pyq"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>📄 RGPV PYQs (PDFs)</a>
+                                <a href="https://www.youtube.com/playlist?list=PLYwpaL_SFmcAjqrKO-b9UMa2AaAlzZY7D" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>5 Minute Engg Communication</a>
+                            </div>
+                            <div class="checklist-group" data-group="sem1">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s1-10" onchange="updateAllProgress()"><span class="check-label">Technical Vocabulary & Grammar</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s1-11" onchange="updateAllProgress()"><span class="check-label">Technical Report & Business Writing</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s1-12" onchange="updateAllProgress()"><span class="check-label">Presentation & Public Speaking Skills</span></label>
+                            </div>
+                        </div>
+
+                        <!-- BT-204 -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">BT-204</span>
+                                        <span class="tag-pill tag-core">Electrical</span>
+                                    </div>
+                                    <div class="subject-name">Basic Electrical & Electronics Engineering</div>
+                                    <div class="subject-desc">DC/AC circuit theorems, transformers, semiconductor diodes, transistors, and logic gates.</div>
+                                </div>
+                            </div>
+                            <div class="resource-group">
+                                <a href="https://www.rgpvonline.com/rgpv-btech-papers.html" target="_blank" class="resource-tag tag-pyq"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>📄 RGPV PYQs (PDFs)</a>
+                                <a href="https://www.youtube.com/playlist?list=PLBlnK6fEyqRgLR-hMp7wem-bdVN1iEhsh" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Neso Academy Electrical</a>
+                                <a href="https://www.youtube.com/playlist?list=PL9RcWoqXmzaLTYUdnzKhF4bYug3GjGcEc" target="_blank" class="resource-tag tag-alt"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Alt: Gate Smashers BEEE</a>
+                            </div>
+                            <div class="checklist-group" data-group="sem1">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s1-13" onchange="updateAllProgress()"><span class="check-label">DC & AC Circuit Analysis Theorems</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s1-14" onchange="updateAllProgress()"><span class="check-label">Semiconductor Diodes & Rectifiers</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s1-15" onchange="updateAllProgress()"><span class="check-label">Transistors (BJT/FET) & Basic Gates</span></label>
+                            </div>
+                        </div>
+
+                        <!-- BT-205 -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">BT-205</span>
+                                        <span class="tag-pill tag-core">Graphics</span>
+                                    </div>
+                                    <div class="subject-name">Engineering Graphics</div>
+                                    <div class="subject-desc">Orthographic projections, isometric views, scales, and engineering drawing fundamentals.</div>
+                                </div>
+                            </div>
+                            <div class="resource-group">
+                                <a href="https://www.rgpvonline.com/rgpv-btech-papers.html" target="_blank" class="resource-tag tag-pyq"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>📄 RGPV PYQs (PDFs)</a>
+                                <a href="https://www.youtube.com/playlist?list=PLIhUrsYr8yHwDUrVYmUNYkEeZgZTvoIfS" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Manas Patnaik Graphics</a>
+                                <a href="https://www.youtube.com/playlist?list=PLDN15nk5uLiD3MEUiqsYPnZOHcVu7um6_" target="_blank" class="resource-tag tag-alt"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Alt: Tikle's Academy EG</a>
+                            </div>
+                            <div class="checklist-group" data-group="sem1">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s1-16" onchange="updateAllProgress()"><span class="check-label">Projections of Points, Lines & Planes</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s1-17" onchange="updateAllProgress()"><span class="check-label">Isometric & Sectional Views</span></label>
+                            </div>
+                        </div>
+
+                        <!-- SELF-STUDY C -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">CS-SELF1</span>
+                                        <span class="tag-pill tag-coding">Self-Directed Core</span>
+                                    </div>
+                                    <div class="subject-name">C Programming & Systems Fundamentals</div>
+                                    <div class="subject-desc">Control structures, functions, memory pointers, dynamic allocation, structures, and file IO.</div>
+                                </div>
+                            </div>
+                            <div class="resource-group">
+                                <a href="https://www.youtube.com/watch?v=KJgsSFOSQv0" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>freeCodeCamp C Course</a>
+                                <a href="https://www.youtube.com/playlist?list=PLu0W_9lII9aiXlHcLx-mDH1Qul38wD3aR" target="_blank" class="resource-tag tag-alt"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Alt: CodeWithHarry C Playlist</a>
+                                <a href="https://www.youtube.com/playlist?list=PLdo5W4Nhv31a8UcMN9-35ghv8qyFWD9_S" target="_blank" class="resource-tag tag-alt"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Alt: Jenny's Lectures C</a>
+                                <a href="https://www.learn-c.org/" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>Interactive C Tutorial</a>
+                                <a href="https://www.hackerrank.com/domains/c" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>HackerRank C Track</a>
+                            </div>
+                            <div class="checklist-group" data-group="sem1">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s1-18" onchange="updateAllProgress()"><span class="check-label">Variables, Data Types, Input/Output</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s1-19" onchange="updateAllProgress()"><span class="check-label">Conditionals (if, else, switch) & Loops</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s1-20" onchange="updateAllProgress()"><span class="check-label">Functions & Recursion Concepts</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s1-21" onchange="updateAllProgress()"><span class="check-label">Arrays, Strings & String Functions</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s1-22" onchange="updateAllProgress()"><span class="check-label">Pointers, Memory & Addresses</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s1-23" onchange="updateAllProgress()"><span class="check-label">Structures, Unions & File I/O</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s1-24" onchange="updateAllProgress()"><span class="check-label">Solve 30+ HackerRank C Problems</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SEMESTER 2 BLOCK -->
+                <div class="semester-block" data-sem="sem2" data-year="year1">
+                    <div class="semester-header-bar" onclick="toggleBlock(this)">
+                        <div class="semester-title-group">
+                            <span class="sem-badge">SEM 2</span>
+                            <div>
+                                <div class="sem-name">Semester II — Physical Sciences & Python Programming</div>
+                                <div class="sem-meta">Physics, Advanced Math, Basic Mechanical/Civil & Python Fundamentals</div>
+                            </div>
+                        </div>
+                        <div class="sem-progress-info">
+                            <div class="sem-progress-bar-container">
+                                <div class="sem-progress-bar-fill" id="progress-fill-sem2" style="width: 0%;"></div>
+                            </div>
+                            <span class="sem-percentage" id="progress-sem2">0/17 (0%)</span>
+                            <svg class="toggle-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                    </div>
+
+                    <div class="subjects-container">
+                        <!-- BT-301 -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">BT-301</span>
+                                        <span class="tag-pill tag-core">Core Physics</span>
+                                    </div>
+                                    <div class="subject-name">Engineering Physics</div>
+                                    <div class="subject-desc">Wave optics, quantum mechanics, lasers, fiber optics, and semiconductor physics.</div>
+                                </div>
+                            </div>
+                            <div class="resource-group">
+                                <a href="https://www.rgpvonline.com/rgpv-btech-papers.html" target="_blank" class="resource-tag tag-pyq"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>📄 RGPV PYQs (PDFs)</a>
+                                <a href="https://nptel.ac.in/courses/115104096" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>NPTEL Engg Physics</a>
+                                <a href="https://www.youtube.com/playlist?list=PLVbxzb9b13LAxBeM2d5D9Ep5VxtpYG1HO" target="_blank" class="resource-tag tag-alt"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Alt: Technical Physics</a>
+                            </div>
+                            <div class="checklist-group" data-group="sem2">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s2-1" onchange="updateAllProgress()"><span class="check-label">Wave Optics & Interference</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s2-2" onchange="updateAllProgress()"><span class="check-label">Quantum Mechanics & Wave Functions</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s2-3" onchange="updateAllProgress()"><span class="check-label">Laser Systems & Fiber Optics</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s2-4" onchange="updateAllProgress()"><span class="check-label">Semiconductor Physics & Band Theory</span></label>
+                            </div>
+                        </div>
+
+                        <!-- BT-302 -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">BT-302</span>
+                                        <span class="tag-pill tag-core">Core Math</span>
+                                    </div>
+                                    <div class="subject-name">Mathematics — II</div>
+                                    <div class="subject-desc">Linear algebra, vector spaces, complex analysis, Laplace & Fourier transforms.</div>
+                                </div>
+                            </div>
+                            <div class="resource-group">
+                                <a href="https://www.rgpvonline.com/rgpv-btech-papers.html" target="_blank" class="resource-tag tag-pyq"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>📄 RGPV PYQs (PDFs)</a>
+                                <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>3Blue1Brown Linear Algebra</a>
+                                <a href="https://www.youtube.com/playlist?list=PLU6SqdYcYsfLPxjd-k-MaoG7qgRQ-2fKc" target="_blank" class="resource-tag tag-alt"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Alt: Gajendra Purohit Math-II</a>
+                            </div>
+                            <div class="checklist-group" data-group="sem2">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s2-5" onchange="updateAllProgress()"><span class="check-label">Linear Algebra & Eigenvalues</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s2-6" onchange="updateAllProgress()"><span class="check-label">Complex Functions & Integration</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s2-7" onchange="updateAllProgress()"><span class="check-label">Vector Calculus (Gradient, Divergence, Curl)</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s2-8" onchange="updateAllProgress()"><span class="check-label">Laplace & Fourier Transforms</span></label>
+                            </div>
+                        </div>
+
+                        <!-- BT-303/304 -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">BT-303/304</span>
+                                        <span class="tag-pill tag-core">Basic Engg</span>
+                                    </div>
+                                    <div class="subject-name">Basic Mechanical / Civil Engineering</div>
+                                    <div class="subject-desc">Engineering mechanics, thermodynamics, strength of materials, surveying fundamentals.</div>
+                                </div>
+                            </div>
+                            <div class="resource-group">
+                                <a href="https://www.rgpvonline.com/rgpv-btech-papers.html" target="_blank" class="resource-tag tag-pyq"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>📄 RGPV PYQs (PDFs)</a>
+                                <a href="https://www.youtube.com/playlist?list=PLYwpaL_SFmcBhOEPwf5cFwqo5B-cP9G4P" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>5 Minute Engg Mechanics</a>
+                            </div>
+                            <div class="checklist-group" data-group="sem2">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s2-9" onchange="updateAllProgress()"><span class="check-label">Engineering Mechanics & Statics</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s2-10" onchange="updateAllProgress()"><span class="check-label">Laws of Thermodynamics</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s2-11" onchange="updateAllProgress()"><span class="check-label">Building Materials & Surveying</span></label>
+                            </div>
+                        </div>
+
+                        <!-- BT-305 -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">BT-305</span>
+                                        <span class="tag-pill tag-coding">Core Programming</span>
+                                    </div>
+                                    <div class="subject-name">Basic Computer Engineering (Python)</div>
+                                    <div class="subject-desc">Python syntax, data structures (lists, tuples, dicts), file management, modular programming.</div>
+                                </div>
+                            </div>
+                            <div class="resource-group">
+                                <a href="https://www.rgpvonline.com/rgpv-btech-papers.html" target="_blank" class="resource-tag tag-pyq"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>📄 RGPV PYQs (PDFs)</a>
+                                <a href="https://www.youtube.com/watch?v=rfscVS0vtbw" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>freeCodeCamp Python Course</a>
+                                <a href="https://www.youtube.com/playlist?list=PLu0W_9lII9agwh1XjRt242xIpHhPT2llg" target="_blank" class="resource-tag tag-alt"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Alt: CodeWithHarry Python</a>
+                                <a href="https://www.w3schools.com/python/" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>W3Schools Python Guide</a>
+                                <a href="https://www.hackerrank.com/domains/python" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>HackerRank Python Track</a>
+                            </div>
+                            <div class="checklist-group" data-group="sem2">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s2-12" onchange="updateAllProgress()"><span class="check-label">Python Basics — Strings, Lists, Tuples & Dicts</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s2-13" onchange="updateAllProgress()"><span class="check-label">Conditionals & Loops in Python</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s2-14" onchange="updateAllProgress()"><span class="check-label">Functions & Modules</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s2-15" onchange="updateAllProgress()"><span class="check-label">File IO & Exception Handling</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s2-16" onchange="updateAllProgress()"><span class="check-label">Build 3 Small Python Mini-Projects</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s2-17" onchange="updateAllProgress()"><span class="check-label">Create GitHub Account & Push Code</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SEMESTER 3 BLOCK -->
+                <div class="semester-block" data-sem="sem3" data-year="year2">
+                    <div class="semester-header-bar" onclick="toggleBlock(this)">
+                        <div class="semester-title-group">
+                            <span class="sem-badge">SEM 3</span>
+                            <div>
+                                <div class="sem-name">Semester III — Core Computer Science</div>
+                                <div class="sem-meta">Data Structures, Discrete Structures, Object-Oriented Programming, Digital Logic & Environmental Engg</div>
+                            </div>
+                        </div>
+                        <div class="sem-progress-info">
+                            <div class="sem-progress-bar-container">
+                                <div class="sem-progress-bar-fill" id="progress-fill-sem3" style="width: 0%;"></div>
+                            </div>
+                            <span class="sem-percentage" id="progress-sem3">0/23 (0%)</span>
+                            <svg class="toggle-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                    </div>
+
+                    <div class="subjects-container">
+                        <!-- CS-301 -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">CS-301</span>
+                                        <span class="tag-pill tag-core">Core Math</span>
+                                    </div>
+                                    <div class="subject-name">Discrete Structures & Theory of Logic</div>
+                                    <div class="subject-desc">Sets, relations, functions, propositional logic, graph theory, combinatorics, Boolean algebra.</div>
+                                </div>
+                            </div>
+                            <div class="resource-group">
+                                <a href="https://www.rgpvonline.com/rgpv-btech-papers.html" target="_blank" class="resource-tag tag-pyq"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>📄 RGPV PYQs (PDFs)</a>
+                                <a href="https://www.youtube.com/playlist?list=PLBlnK6fEyqRhqJPDXcvYlLfXPh37L89g3" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Neso Academy Discrete Math</a>
+                                <a href="https://www.youtube.com/playlist?list=PLxCzCOWd7aiH2wwES9vPWsEL6ipTaUSl3" target="_blank" class="resource-tag tag-alt"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Alt: Gate Smashers Discrete</a>
+                                <a href="https://www.geeksforgeeks.org/discrete-mathematics-tutorial/" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>GFG Discrete Math</a>
+                            </div>
+                            <div class="checklist-group" data-group="sem3">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s3-1" onchange="updateAllProgress()"><span class="check-label">Sets, Relations & Functions</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s3-2" onchange="updateAllProgress()"><span class="check-label">Propositional & Predicate Logic</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s3-3" onchange="updateAllProgress()"><span class="check-label">Combinatorics & Counting Principles</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s3-4" onchange="updateAllProgress()"><span class="check-label">Graph Theory Fundamentals</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s3-5" onchange="updateAllProgress()"><span class="check-label">Boolean Algebra & Lattices</span></label>
+                            </div>
+                        </div>
+
+                        <!-- CS-302 -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">CS-302</span>
+                                        <span class="tag-pill tag-core">Critical CS Core</span>
+                                    </div>
+                                    <div class="subject-name">Data Structures</div>
+                                    <div class="subject-desc">Arrays, Linked Lists, Stacks, Queues, Binary Trees, BST, AVL Trees, Graphs, Hashing.</div>
+                                </div>
+                            </div>
+                            <div class="resource-group">
+                                <a href="https://www.rgpvonline.com/rgpv-btech-papers.html" target="_blank" class="resource-tag tag-pyq"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>📄 RGPV PYQs (PDFs)</a>
+                                <a href="https://takeuforward.org/" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>Striver's DSA Guide</a>
+                                <a href="https://www.youtube.com/playlist?list=PLAXnLdrLnQpRcveZTtD644gM9uzYqJCwr" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Abdul Bari DSA Lectures</a>
+                                <a href="https://www.youtube.com/playlist?list=PLdo5W4Nhv31bbKJzrsKfMpo_grxuLl8LU" target="_blank" class="resource-tag tag-alt"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Alt: Jenny's Lectures DSA</a>
+                                <a href="https://leetcode.com/" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>LeetCode Platform</a>
+                            </div>
+                            <div class="checklist-group" data-group="sem3">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s3-6" onchange="updateAllProgress()"><span class="check-label">Arrays, Strings & Sorting Algorithms</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s3-7" onchange="updateAllProgress()"><span class="check-label">Singly, Doubly & Circular Linked Lists</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s3-8" onchange="updateAllProgress()"><span class="check-label">Stacks & Queues Implementation</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s3-9" onchange="updateAllProgress()"><span class="check-label">Binary Trees, BST & AVL Trees</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s3-10" onchange="updateAllProgress()"><span class="check-label">Graphs (BFS, DFS, Matrix/List Rep)</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s3-11" onchange="updateAllProgress()"><span class="check-label">Hashing & Collision Resolution</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s3-12" onchange="updateAllProgress()"><span class="check-label">Solve 50+ Easy LeetCode Problems</span></label>
+                            </div>
+                        </div>
+
+                        <!-- CS-303 -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">CS-303</span>
+                                        <span class="tag-pill tag-core">Digital Hardware</span>
+                                    </div>
+                                    <div class="subject-name">Digital System Design</div>
+                                    <div class="subject-desc">Logic gates, Boolean minimization, combinational circuits (mux/adders), sequential flip-flops & counters.</div>
+                                </div>
+                            </div>
+                            <div class="resource-group">
+                                <a href="https://www.rgpvonline.com/rgpv-btech-papers.html" target="_blank" class="resource-tag tag-pyq"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>📄 RGPV PYQs (PDFs)</a>
+                                <a href="https://www.youtube.com/playlist?list=PLBlnK6fEyqRjMH3mWf6kwqiTbT798eAOm" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Neso Academy Digital Electronics</a>
+                                <a href="https://www.youtube.com/playlist?list=PLxCzCOWd7aiGmXg4NoX6R31AsC5LeCPHe" target="_blank" class="resource-tag tag-alt"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Alt: Gate Smashers Digital</a>
+                            </div>
+                            <div class="checklist-group" data-group="sem3">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s3-13" onchange="updateAllProgress()"><span class="check-label">Number Systems & Logic Gates</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s3-14" onchange="updateAllProgress()"><span class="check-label">Combinational Circuits (Mux, Adders)</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s3-15" onchange="updateAllProgress()"><span class="check-label">Sequential Circuits (Flip-flops, Counters)</span></label>
+                            </div>
+                        </div>
+
+                        <!-- CS-304 -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">CS-304</span>
+                                        <span class="tag-pill tag-coding">OOP Paradigm</span>
+                                    </div>
+                                    <div class="subject-name">Object-Oriented Programming (Java / C++)</div>
+                                    <div class="subject-desc">Classes, Objects, Inheritance, Encapsulation, Polymorphism, Exception Handling, Collections / STL.</div>
+                                </div>
+                            </div>
+                            <div class="resource-group">
+                                <a href="https://www.rgpvonline.com/rgpv-btech-papers.html" target="_blank" class="resource-tag tag-pyq"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>📄 RGPV PYQs (PDFs)</a>
+                                <a href="https://www.youtube.com/playlist?list=PL9gnSGHSqcnr_DxHsP7AW9ftq0AtAyYqJ" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Kunal Kushwaha Java DSA</a>
+                                <a href="https://www.youtube.com/playlist?list=PLu0W_9lII9agS67Uits0UnJyrYiXhDS6q" target="_blank" class="resource-tag tag-alt"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Alt: CodeWithHarry Java</a>
+                            </div>
+                            <div class="checklist-group" data-group="sem3">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s3-16" onchange="updateAllProgress()"><span class="check-label">Classes, Objects & Constructors</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s3-17" onchange="updateAllProgress()"><span class="check-label">Inheritance & Polymorphism</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s3-18" onchange="updateAllProgress()"><span class="check-label">Encapsulation & Abstraction</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s3-19" onchange="updateAllProgress()"><span class="check-label">Exception Handling & Interfaces</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s3-20" onchange="updateAllProgress()"><span class="check-label">Collections Framework / C++ STL</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s3-21" onchange="updateAllProgress()"><span class="check-label">Build an OOP Mini Project</span></label>
+                            </div>
+                        </div>
+
+                        <!-- ES-301 -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">ES-301</span>
+                                        <span class="tag-pill tag-foundation">Environmental Science</span>
+                                    </div>
+                                    <div class="subject-name">Energy & Environmental Engineering</div>
+                                    <div class="subject-desc">Ecosystems, renewable energy sources, environmental pollution & management.</div>
+                                </div>
+                            </div>
+                            <div class="resource-group">
+                                <a href="https://www.rgpvonline.com/rgpv-btech-papers.html" target="_blank" class="resource-tag tag-pyq"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>📄 RGPV PYQs (PDFs)</a>
+                                <a href="https://www.youtube.com/playlist?list=PL3qvHcrYGy1u2egw2tipHWODV6elVC2Gg" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>5 Minute Engg Environment</a>
+                            </div>
+                            <div class="checklist-group" data-group="sem3">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s3-22" onchange="updateAllProgress()"><span class="check-label">Renewable Energy Resources</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s3-23" onchange="updateAllProgress()"><span class="check-label">Environmental Pollution Control</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SEMESTER 4 BLOCK -->
+                <div class="semester-block" data-sem="sem4" data-year="year2">
+                    <div class="semester-header-bar" onclick="toggleBlock(this)">
+                        <div class="semester-title-group">
+                            <span class="sem-badge">SEM 4</span>
+                            <div>
+                                <div class="sem-name">Semester IV — Algorithms & Operating Systems</div>
+                                <div class="sem-meta">Analysis & Design of Algorithms (ADA), Operating Systems, Architecture (COA), Software Engg & Math-III</div>
+                            </div>
+                        </div>
+                        <div class="sem-progress-info">
+                            <div class="sem-progress-bar-container">
+                                <div class="sem-progress-bar-fill" id="progress-fill-sem4" style="width: 0%;"></div>
+                            </div>
+                            <span class="sem-percentage" id="progress-sem4">0/18 (0%)</span>
+                            <svg class="toggle-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                    </div>
+
+                    <div class="subjects-container">
+                        <!-- CS-401 -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">CS-401</span>
+                                        <span class="tag-pill tag-core">Architecture Core</span>
+                                    </div>
+                                    <div class="subject-name">Computer Organization & Architecture (COA)</div>
+                                    <div class="subject-desc">CPU organization, instruction execution cycle, pipelining, memory hierarchy, cache mapping.</div>
+                                </div>
+                            </div>
+                            <div class="resource-group">
+                                <a href="https://www.rgpvonline.com/rgpv-btech-papers.html" target="_blank" class="resource-tag tag-pyq"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>📄 RGPV PYQs (PDFs)</a>
+                                <a href="https://www.youtube.com/playlist?list=PLxCzCOWd7aiHMonh3G6QNKq53C6oNXGrX" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Gate Smashers COA</a>
+                                <a href="https://www.youtube.com/playlist?list=PLBlnK6fEyqRgLLlzdgiTUKULKJPYc0A4q" target="_blank" class="resource-tag tag-alt"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Alt: Neso Academy COA</a>
+                            </div>
+                            <div class="checklist-group" data-group="sem4">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s4-1" onchange="updateAllProgress()"><span class="check-label">CPU Architecture & Instruction Cycle</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s4-2" onchange="updateAllProgress()"><span class="check-label">Pipelining & Execution Hazards</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s4-3" onchange="updateAllProgress()"><span class="check-label">Memory Hierarchy & Cache Mapping</span></label>
+                            </div>
+                        </div>
+
+                        <!-- CS-402 -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">CS-402</span>
+                                        <span class="tag-pill tag-core">Critical CS Core</span>
+                                    </div>
+                                    <div class="subject-name">Analysis & Design of Algorithms (ADA)</div>
+                                    <div class="subject-desc">Divide & Conquer, Greedy method, Dynamic Programming, Backtracking, Graph algorithms (Dijkstra/MST).</div>
+                                </div>
+                            </div>
+                            <div class="resource-group">
+                                <a href="https://www.rgpvonline.com/rgpv-btech-papers.html" target="_blank" class="resource-tag tag-pyq"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>📄 RGPV PYQs (PDFs)</a>
+                                <a href="https://takeuforward.org/" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>Striver's A2Z DSA Sheet</a>
+                                <a href="https://www.youtube.com/playlist?list=PLDN4rrl48XKpZkf03iYFl-O29szjTrs_O" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Abdul Bari Algorithms</a>
+                                <a href="https://www.youtube.com/playlist?list=PLxCzCOWd7aiHcmS4i14bI0VrMbZTUvlTa" target="_blank" class="resource-tag tag-alt"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Alt: Gate Smashers ADA</a>
+                            </div>
+                            <div class="checklist-group" data-group="sem4">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s4-4" onchange="updateAllProgress()"><span class="check-label">Time & Space Complexity (Big O)</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s4-5" onchange="updateAllProgress()"><span class="check-label">Sorting — Merge Sort & Quick Sort</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s4-6" onchange="updateAllProgress()"><span class="check-label">Greedy Algorithms & Knapsack</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s4-7" onchange="updateAllProgress()"><span class="check-label">Dynamic Programming Basics</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s4-8" onchange="updateAllProgress()"><span class="check-label">Graph Algorithms (Dijkstra, Bellman-Ford, MST)</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s4-9" onchange="updateAllProgress()"><span class="check-label">Solve 100+ LeetCode Problems</span></label>
+                            </div>
+                        </div>
+
+                        <!-- CS-403 -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">CS-403</span>
+                                        <span class="tag-pill tag-core">Systems Core</span>
+                                    </div>
+                                    <div class="subject-name">Operating Systems</div>
+                                    <div class="subject-desc">Process management, CPU scheduling, inter-process communication, deadlocks, virtual memory.</div>
+                                </div>
+                            </div>
+                            <div class="resource-group">
+                                <a href="https://www.rgpvonline.com/rgpv-btech-papers.html" target="_blank" class="resource-tag tag-pyq"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>📄 RGPV PYQs (PDFs)</a>
+                                <a href="https://www.youtube.com/playlist?list=PLxCzCOWd7aiGz9donHRrE9I3Mwn6XdP8p" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Gate Smashers OS</a>
+                                <a href="https://www.youtube.com/playlist?list=PLdo5W4Nhv31a5ucW_S1K3-x6ztBRD-PNa" target="_blank" class="resource-tag tag-alt"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Alt: Jenny's Lectures OS</a>
+                            </div>
+                            <div class="checklist-group" data-group="sem4">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s4-10" onchange="updateAllProgress()"><span class="check-label">Process Management & CPU Scheduling</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s4-11" onchange="updateAllProgress()"><span class="check-label">Process Synchronization & Deadlocks</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s4-12" onchange="updateAllProgress()"><span class="check-label">Memory Management & Virtual Memory</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s4-13" onchange="updateAllProgress()"><span class="check-label">File Systems & Disk Scheduling</span></label>
+                            </div>
+                        </div>
+
+                        <!-- CS-404 -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">CS-404</span>
+                                        <span class="tag-pill tag-core">Software Engg</span>
+                                    </div>
+                                    <div class="subject-name">Software Engineering</div>
+                                    <div class="subject-desc">Software development lifecycle (SDLC), Agile development, UML modeling, software testing.</div>
+                                </div>
+                            </div>
+                            <div class="resource-group">
+                                <a href="https://www.rgpvonline.com/rgpv-btech-papers.html" target="_blank" class="resource-tag tag-pyq"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>📄 RGPV PYQs (PDFs)</a>
+                                <a href="https://www.youtube.com/playlist?list=PLxCzCOWd7aiEed7SKZBnC6ypFDWYLRvB2" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Gate Smashers Software Engg</a>
+                            </div>
+                            <div class="checklist-group" data-group="sem4">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s4-14" onchange="updateAllProgress()"><span class="check-label">SDLC Models (Waterfall, Agile, Scrum)</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s4-15" onchange="updateAllProgress()"><span class="check-label">SRS & UML Diagrams</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s4-16" onchange="updateAllProgress()"><span class="check-label">Software Testing (White-box, Black-box)</span></label>
+                            </div>
+                        </div>
+
+                        <!-- BT-401 -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">BT-401</span>
+                                        <span class="tag-pill tag-core">Core Math</span>
+                                    </div>
+                                    <div class="subject-name">Mathematics — III</div>
+                                    <div class="subject-desc">Probability distributions, statistics, numerical methods, transform calculus.</div>
+                                </div>
+                            </div>
+                            <div class="resource-group">
+                                <a href="https://www.rgpvonline.com/rgpv-btech-papers.html" target="_blank" class="resource-tag tag-pyq"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>📄 RGPV PYQs (PDFs)</a>
+                                <a href="https://www.youtube.com/playlist?list=PLU6SqdYcYsfLrTna7UuaVfGZYkNo0cpVC" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Gajendra Purohit Math-III</a>
+                            </div>
+                            <div class="checklist-group" data-group="sem4">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s4-17" onchange="updateAllProgress()"><span class="check-label">Probability Distributions & Statistics</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s4-18" onchange="updateAllProgress()"><span class="check-label">Numerical Analysis Methods</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SEMESTER 5 BLOCK -->
+                <div class="semester-block" data-sem="sem5" data-year="year3">
+                    <div class="semester-header-bar" onclick="toggleBlock(this)">
+                        <div class="semester-title-group">
+                            <span class="sem-badge">SEM 5</span>
+                            <div>
+                                <div class="sem-name">Semester V — Database Systems & Web Development</div>
+                                <div class="sem-meta">DBMS, Theory of Computation (TOC), Electives, Linux Lab & Full-Stack Web Dev Track</div>
+                            </div>
+                        </div>
+                        <div class="sem-progress-info">
+                            <div class="sem-progress-bar-container">
+                                <div class="sem-progress-bar-fill" id="progress-fill-sem5" style="width: 0%;"></div>
+                            </div>
+                            <span class="sem-percentage" id="progress-sem5">0/18 (0%)</span>
+                            <svg class="toggle-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                    </div>
+
+                    <div class="subjects-container">
+                        <!-- CS-501 -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">CS-501</span>
+                                        <span class="tag-pill tag-core">Database Core</span>
+                                    </div>
+                                    <div class="subject-name">Database Management Systems (DBMS)</div>
+                                    <div class="subject-desc">ER Modeling, Relational Algebra, SQL, Normalization (1NF to BCNF), Transactions & Concurrency.</div>
+                                </div>
+                            </div>
+                            <div class="resource-group">
+                                <a href="https://www.rgpvonline.com/rgpv-btech-papers.html" target="_blank" class="resource-tag tag-pyq"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>📄 RGPV PYQs (PDFs)</a>
+                                <a href="https://www.youtube.com/playlist?list=PLxCzCOWd7aiFAN6I8CuViBuCdJgiOkT2Y" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Gate Smashers DBMS</a>
+                                <a href="https://www.youtube.com/playlist?list=PLDzeHZWIZsTpukecmA2p5rhHM14bl2dHU" target="_blank" class="resource-tag tag-alt"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Alt: Love Babbar SQL</a>
+                                <a href="https://sqlzoo.net/" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>SQLZoo Interactive</a>
+                            </div>
+                            <div class="checklist-group" data-group="sem5">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s5-1" onchange="updateAllProgress()"><span class="check-label">ER Diagrams & Relational Model</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s5-2" onchange="updateAllProgress()"><span class="check-label">SQL — SELECT, Joins, Aggregations & Subqueries</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s5-3" onchange="updateAllProgress()"><span class="check-label">Normalization (1NF, 2NF, 3NF, BCNF)</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s5-4" onchange="updateAllProgress()"><span class="check-label">Transactions & ACID Concurrency Control</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s5-5" onchange="updateAllProgress()"><span class="check-label">Indexing & Query Optimization</span></label>
+                            </div>
+                        </div>
+
+                        <!-- CS-502 -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">CS-502</span>
+                                        <span class="tag-pill tag-core">Theory Core</span>
+                                    </div>
+                                    <div class="subject-name">Theory of Computation (TOC)</div>
+                                    <div class="subject-desc">Finite Automata (DFA/NFA), Regular Expressions, Context-Free Grammars, Pushdown Automata, Turing Machines.</div>
+                                </div>
+                            </div>
+                            <div class="resource-group">
+                                <a href="https://www.rgpvonline.com/rgpv-btech-papers.html" target="_blank" class="resource-tag tag-pyq"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>📄 RGPV PYQs (PDFs)</a>
+                                <a href="https://www.youtube.com/playlist?list=PLBlnK6fEyqRhd3kSEsaT5rxvVnIh4UK-r" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Neso Academy TOC</a>
+                                <a href="https://www.youtube.com/playlist?list=PLxCzCOWd7aiFM9Lj5G9G_76adtyb4ef7i" target="_blank" class="resource-tag tag-alt"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Alt: Gate Smashers TOC</a>
+                            </div>
+                            <div class="checklist-group" data-group="sem5">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s5-6" onchange="updateAllProgress()"><span class="check-label">DFA & NFA Finite Automata</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s5-7" onchange="updateAllProgress()"><span class="check-label">Regular Languages & Pumping Lemma</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s5-8" onchange="updateAllProgress()"><span class="check-label">Context-Free Grammars & PDA</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s5-9" onchange="updateAllProgress()"><span class="check-label">Turing Machines & Decidability</span></label>
+                            </div>
+                        </div>
+
+                        <!-- CS-SELF2 -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">CS-SELF2</span>
+                                        <span class="tag-pill tag-coding">Full-Stack Path</span>
+                                    </div>
+                                    <div class="subject-name">Full-Stack Web Development Track</div>
+                                    <div class="subject-desc">HTML5, CSS3, JavaScript (DOM, Async/Promises), React.js, Node.js & Express REST APIs.</div>
+                                </div>
+                            </div>
+                            <div class="resource-group">
+                                <a href="https://www.theodinproject.com/" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>The Odin Project</a>
+                                <a href="https://www.youtube.com/playlist?list=PLu0W_9lII9agq5TrH9XLIKQvv0iaF2X3w" target="_blank" class="resource-tag tag-alt"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Alt: CodeWithHarry Sigma Web Dev</a>
+                                <a href="https://javascript.info/" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>JavaScript.info</a>
+                            </div>
+                            <div class="checklist-group" data-group="sem5">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s5-10" onchange="updateAllProgress()"><span class="check-label">HTML5 & Modern Responsive CSS Flex/Grid</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s5-11" onchange="updateAllProgress()"><span class="check-label">JavaScript DOM, Events & Async/Await</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s5-12" onchange="updateAllProgress()"><span class="check-label">Build & Deploy Personal Portfolio Website</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s5-13" onchange="updateAllProgress()"><span class="check-label">React.js Components, State & Hooks</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s5-14" onchange="updateAllProgress()"><span class="check-label">Node.js & Express REST API Server</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s5-15" onchange="updateAllProgress()"><span class="check-label">Build Full-Stack MERN Application</span></label>
+                            </div>
+                        </div>
+
+                        <!-- CS-505 -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">CS-505</span>
+                                        <span class="tag-pill tag-lab">Linux & Lab</span>
+                                    </div>
+                                    <div class="subject-name">Linux Lab + Python Lab + Minor Project I</div>
+                                    <div class="subject-desc">Linux CLI commands, shell scripting, file permissions, Python automation & project development.</div>
+                                </div>
+                            </div>
+                            <div class="resource-group">
+                                <a href="https://www.rgpvonline.com/rgpv-btech-papers.html" target="_blank" class="resource-tag tag-pyq"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>📄 RGPV PYQs (PDFs)</a>
+                                <a href="https://www.youtube.com/playlist?list=PLIhvC56v63IJIujb5cyE13oLuyORZpdkL" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>NetworkChuck Linux</a>
+                            </div>
+                            <div class="checklist-group" data-group="sem5">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s5-16" onchange="updateAllProgress()"><span class="check-label">Linux File System Navigation & Commands</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s5-17" onchange="updateAllProgress()"><span class="check-label">Bash Shell Scripting</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s5-18" onchange="updateAllProgress()"><span class="check-label">Complete Minor Project I Defense</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SEMESTER 6 BLOCK -->
+                <div class="semester-block" data-sem="sem6" data-year="year3">
+                    <div class="semester-header-bar" onclick="toggleBlock(this)">
+                        <div class="semester-title-group">
+                            <span class="sem-badge">SEM 6</span>
+                            <div>
+                                <div class="sem-name">Semester VI — Networks & Machine Learning</div>
+                                <div class="sem-meta">Computer Networks, Machine Learning, Compiler Design, Data Analytics & Minor Project II</div>
+                            </div>
+                        </div>
+                        <div class="sem-progress-info">
+                            <div class="sem-progress-bar-container">
+                                <div class="sem-progress-bar-fill" id="progress-fill-sem6" style="width: 0%;"></div>
+                            </div>
+                            <span class="sem-percentage" id="progress-sem6">0/15 (0%)</span>
+                            <svg class="toggle-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                    </div>
+
+                    <div class="subjects-container">
+                        <!-- CS-602 -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">CS-602</span>
+                                        <span class="tag-pill tag-core">Networks Core</span>
+                                    </div>
+                                    <div class="subject-name">Computer Networks</div>
+                                    <div class="subject-desc">ISO-OSI model, TCP/IP stack, Routing algorithms, Transport protocols (TCP/UDP), HTTP/DNS security.</div>
+                                </div>
+                            </div>
+                            <div class="resource-group">
+                                <a href="https://www.rgpvonline.com/rgpv-btech-papers.html" target="_blank" class="resource-tag tag-pyq"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>📄 RGPV PYQs (PDFs)</a>
+                                <a href="https://www.youtube.com/playlist?list=PLxCzCOWd7aiGFBD2-2joCpWOLUrDLvVV_" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Gate Smashers Networks</a>
+                                <a href="https://www.youtube.com/playlist?list=PLBlnK6fEyqRgMCUAG0XRw78UA8qnv6jEx" target="_blank" class="resource-tag tag-alt"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Alt: Neso Academy CN</a>
+                            </div>
+                            <div class="checklist-group" data-group="sem6">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s6-1" onchange="updateAllProgress()"><span class="check-label">OSI & TCP/IP Network Models</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s6-2" onchange="updateAllProgress()"><span class="check-label">HTTP, DNS, DHCP Application Protocols</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s6-3" onchange="updateAllProgress()"><span class="check-label">IP Addressing, Subnetting & Routing</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s6-4" onchange="updateAllProgress()"><span class="check-label">Transport Protocols (TCP vs UDP)</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s6-5" onchange="updateAllProgress()"><span class="check-label">Network Security & Firewalls</span></label>
+                            </div>
+                        </div>
+
+                        <!-- CS-601 -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">CS-601</span>
+                                        <span class="tag-pill tag-elective">AI / ML</span>
+                                    </div>
+                                    <div class="subject-name">Machine Learning</div>
+                                    <div class="subject-desc">Supervised/Unsupervised learning, linear regression, classification trees, SVM, clustering, neural networks.</div>
+                                </div>
+                            </div>
+                            <div class="resource-group">
+                                <a href="https://www.rgpvonline.com/rgpv-btech-papers.html" target="_blank" class="resource-tag tag-pyq"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>📄 RGPV PYQs (PDFs)</a>
+                                <a href="https://www.youtube.com/playlist?list=PLkDaE6sCZn6FNC6YRfRQc_FbeQrF8BwGI" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Andrew Ng Machine Learning</a>
+                                <a href="https://www.youtube.com/playlist?list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH" target="_blank" class="resource-tag tag-alt"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Alt: CampusX ML</a>
+                                <a href="https://www.kaggle.com/learn" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>Kaggle Learn Courses</a>
+                            </div>
+                            <div class="checklist-group" data-group="sem6">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s6-6" onchange="updateAllProgress()"><span class="check-label">Linear & Logistic Regression Models</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s6-7" onchange="updateAllProgress()"><span class="check-label">Decision Trees & Random Forest</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s6-8" onchange="updateAllProgress()"><span class="check-label">Clustering Algorithms (K-Means)</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s6-9" onchange="updateAllProgress()"><span class="check-label">Build & Evaluate ML Model on Kaggle</span></label>
+                            </div>
+                        </div>
+
+                        <!-- CS-603 -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">CS-603</span>
+                                        <span class="tag-pill tag-elective">Elective</span>
+                                    </div>
+                                    <div class="subject-name">Compiler Design / Computer Graphics</div>
+                                    <div class="subject-desc">Lexical analysis, parsing techniques, syntax trees, code optimization OR 2D/3D transformations.</div>
+                                </div>
+                            </div>
+                            <div class="resource-group">
+                                <a href="https://www.rgpvonline.com/rgpv-btech-papers.html" target="_blank" class="resource-tag tag-pyq"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>📄 RGPV PYQs (PDFs)</a>
+                                <a href="https://www.youtube.com/playlist?list=PLxCzCOWd7aiEKtKSIHYusizkESC42diyc" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Gate Smashers Compiler</a>
+                            </div>
+                            <div class="checklist-group" data-group="sem6">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s6-10" onchange="updateAllProgress()"><span class="check-label">Lexical Analysis & Tokenization</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s6-11" onchange="updateAllProgress()"><span class="check-label">Parsing Strategies (Top-down / Bottom-up)</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s6-12" onchange="updateAllProgress()"><span class="check-label">Intermediate Code Generation</span></label>
+                            </div>
+                        </div>
+
+                        <!-- CS-605 -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">CS-605</span>
+                                        <span class="tag-pill tag-lab">Data Lab & Project</span>
+                                    </div>
+                                    <div class="subject-name">Data Analytics Lab + Minor Project II</div>
+                                    <div class="subject-desc">Pandas, NumPy, data cleaning, visualization with Matplotlib, exploratory data analysis.</div>
+                                </div>
+                            </div>
+                            <div class="resource-group">
+                                <a href="https://www.rgpvonline.com/rgpv-btech-papers.html" target="_blank" class="resource-tag tag-pyq"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>📄 RGPV PYQs (PDFs)</a>
+                                <a href="https://www.youtube.com/watch?v=vmEHCJofslg" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>freeCodeCamp Data Analysis</a>
+                            </div>
+                            <div class="checklist-group" data-group="sem6">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s6-13" onchange="updateAllProgress()"><span class="check-label">Pandas & NumPy Data Analysis</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s6-14" onchange="updateAllProgress()"><span class="check-label">Data Visualization (Matplotlib / Seaborn)</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s6-15" onchange="updateAllProgress()"><span class="check-label">Complete Minor Project II Evaluation</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SEMESTER 7 BLOCK -->
+                <div class="semester-block" data-sem="sem7" data-year="year4">
+                    <div class="semester-header-bar" onclick="toggleBlock(this)">
+                        <div class="semester-title-group">
+                            <span class="sem-badge">SEM 7</span>
+                            <div>
+                                <div class="sem-name">Semester VII — Placement Sprint & System Architecture</div>
+                                <div class="sem-meta">Software Architecture, Placement Preparation, Electives & Major Project I</div>
+                            </div>
+                        </div>
+                        <div class="sem-progress-info">
+                            <div class="sem-progress-bar-container">
+                                <div class="sem-progress-bar-fill" id="progress-fill-sem7" style="width: 0%;"></div>
+                            </div>
+                            <span class="sem-percentage" id="progress-sem7">0/14 (0%)</span>
+                            <svg class="toggle-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                    </div>
+
+                    <div class="subjects-container">
+                        <!-- CS-701 -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">CS-701</span>
+                                        <span class="tag-pill tag-core">Architecture Core</span>
+                                    </div>
+                                    <div class="subject-name">Software Architectures & System Design</div>
+                                    <div class="subject-desc">Design patterns, microservices, scalability, caching strategies, load balancers, database sharding.</div>
+                                </div>
+                            </div>
+                            <div class="resource-group">
+                                <a href="https://www.rgpvonline.com/rgpv-btech-papers.html" target="_blank" class="resource-tag tag-pyq"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>📄 RGPV PYQs (PDFs)</a>
+                                <a href="https://github.com/donnemartin/system-design-primer" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>System Design Primer</a>
+                                <a href="https://www.youtube.com/playlist?list=PLMCXHnjXnTnvo6alSjVkgxV-VH6EPyvoX" target="_blank" class="resource-tag tag-alt"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Alt: Gaurav Sen System Design</a>
+                            </div>
+                            <div class="checklist-group" data-group="sem7">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s7-1" onchange="updateAllProgress()"><span class="check-label">Design Patterns (Singleton, Factory, Observer)</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s7-2" onchange="updateAllProgress()"><span class="check-label">Microservices vs Monolithic Systems</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s7-3" onchange="updateAllProgress()"><span class="check-label">High-Level System Design & Scalability</span></label>
+                            </div>
+                        </div>
+
+                        <!-- CS-702 -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">CS-702</span>
+                                        <span class="tag-pill tag-elective">Elective</span>
+                                    </div>
+                                    <div class="subject-name">Deep Learning / Big Data Analytics</div>
+                                    <div class="subject-desc">Neural networks, CNNs, RNNs, Hadoop/Spark architectures, large-scale data processing.</div>
+                                </div>
+                            </div>
+                            <div class="resource-group">
+                                <a href="https://www.rgpvonline.com/rgpv-btech-papers.html" target="_blank" class="resource-tag tag-pyq"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>📄 RGPV PYQs (PDFs)</a>
+                                <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>3Blue1Brown Neural Networks</a>
+                                <a href="https://www.youtube.com/playlist?list=PLZoTAELRMXVPGU70ZGsckrMdr0FteeRUi" target="_blank" class="resource-tag tag-alt"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Alt: Krish Naik Deep Learning</a>
+                            </div>
+                            <div class="checklist-group" data-group="sem7">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s7-4" onchange="updateAllProgress()"><span class="check-label">Deep Neural Networks & Backpropagation</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s7-5" onchange="updateAllProgress()"><span class="check-label">Build Deep Learning Model</span></label>
+                            </div>
+                        </div>
+
+                        <!-- CS-SELF3 -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">CS-SELF3</span>
+                                        <span class="tag-pill tag-coding">Placement Priority</span>
+                                    </div>
+                                    <div class="subject-name">Placement Preparation & Interview Sprints</div>
+                                    <div class="subject-desc">DSA SDE Sheet practice, core CS revision (OS, DBMS, CN), resume polish, and mock interviews.</div>
+                                </div>
+                            </div>
+                            <div class="resource-group">
+                                <a href="https://takeuforward.org/strivers-a2z-dsa-course/strivers-a2z-dsa-course-sheet-2/" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>Striver SDE Sheet</a>
+                                <a href="https://neetcode.io/" target="_blank" class="resource-tag tag-alt"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>Alt: NeetCode 150 Sheet</a>
+                                <a href="https://www.pramp.com/" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>Pramp Mock Interviews</a>
+                                <a href="https://resumake.io/" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>ATS Resume Builder</a>
+                            </div>
+                            <div class="checklist-group" data-group="sem7">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s7-6" onchange="updateAllProgress()"><span class="check-label">Complete Striver's Top SDE Sheet Problems</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s7-7" onchange="updateAllProgress()"><span class="check-label">Revise OS, DBMS, CN for Technical Interviews</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s7-8" onchange="updateAllProgress()"><span class="check-label">Solve 200+ LeetCode Problems Total</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s7-9" onchange="updateAllProgress()"><span class="check-label">Build ATS-Friendly Resume</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s7-10" onchange="updateAllProgress()"><span class="check-label">Practice 10+ Mock Interviews</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s7-11" onchange="updateAllProgress()"><span class="check-label">Apply to 50+ Off-Campus & Campus Opportunities</span></label>
+                            </div>
+                        </div>
+
+                        <!-- CS-704 -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">CS-704</span>
+                                        <span class="tag-pill tag-project">Major Project</span>
+                                    </div>
+                                    <div class="subject-name">Major Project I & Portfolio Setup</div>
+                                    <div class="subject-desc">Project scope, architecture, prototype implementation, and deployment setup.</div>
+                                </div>
+                            </div>
+                            <div class="checklist-group" data-group="sem7">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s7-12" onchange="updateAllProgress()"><span class="check-label">Finalize Major Project Architecture & Scope</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s7-13" onchange="updateAllProgress()"><span class="check-label">GitHub Portfolio Setup with 5+ Projects</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s7-14" onchange="updateAllProgress()"><span class="check-label">Deploy at Least 2 Live Web Projects</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SEMESTER 8 BLOCK -->
+                <div class="semester-block" data-sem="sem8" data-year="year4">
+                    <div class="semester-header-bar" onclick="toggleBlock(this)">
+                        <div class="semester-title-group">
+                            <span class="sem-badge">SEM 8</span>
+                            <div>
+                                <div class="sem-name">Semester VIII — Capstone & Career Transition</div>
+                                <div class="sem-meta">IoT, Cloud Computing, Major Project II & Final Placement Sprint</div>
+                            </div>
+                        </div>
+                        <div class="sem-progress-info">
+                            <div class="sem-progress-bar-container">
+                                <div class="sem-progress-bar-fill" id="progress-fill-sem8" style="width: 0%;"></div>
+                            </div>
+                            <span class="sem-percentage" id="progress-sem8">0/12 (0%)</span>
+                            <svg class="toggle-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                    </div>
+
+                    <div class="subjects-container">
+                        <!-- CS-801 -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">CS-801</span>
+                                        <span class="tag-pill tag-core">IoT Core</span>
+                                    </div>
+                                    <div class="subject-name">Internet of Things (IoT)</div>
+                                    <div class="subject-desc">IoT architecture, sensors & actuators, protocols (MQTT, CoAP), cloud-edge integration.</div>
+                                </div>
+                            </div>
+                            <div class="resource-group">
+                                <a href="https://www.rgpvonline.com/rgpv-btech-papers.html" target="_blank" class="resource-tag tag-pyq"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>📄 RGPV PYQs (PDFs)</a>
+                                <a href="https://nptel.ac.in/courses/106105166" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>NPTEL IoT Course</a>
+                                <a href="https://www.youtube.com/playlist?list=PL9ooVrP1hQOGccfBbP5tJWZ1hv5sIUWJl" target="_blank" class="resource-tag tag-alt"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Alt: Edureka IoT</a>
+                            </div>
+                            <div class="checklist-group" data-group="sem8">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s8-1" onchange="updateAllProgress()"><span class="check-label">IoT Architecture & Sensor Communications</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s8-2" onchange="updateAllProgress()"><span class="check-label">MQTT & CoAP Protocols</span></label>
+                            </div>
+                        </div>
+
+                        <!-- CS-802 -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">CS-802</span>
+                                        <span class="tag-pill tag-elective">Cloud Elective</span>
+                                    </div>
+                                    <div class="subject-name">Cloud Computing / DevOps Basics</div>
+                                    <div class="subject-desc">AWS/GCP fundamentals, Docker containers, Kubernetes, CI/CD automated deployment pipelines.</div>
+                                </div>
+                            </div>
+                            <div class="resource-group">
+                                <a href="https://www.rgpvonline.com/rgpv-btech-papers.html" target="_blank" class="resource-tag tag-pyq"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>📄 RGPV PYQs (PDFs)</a>
+                                <a href="https://www.youtube.com/watch?v=3c-iBn73dDE" target="_blank" class="resource-tag"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>TechWorld Docker</a>
+                                <a href="https://www.youtube.com/playlist?list=PLdpzxOOAlwvIKMhk8WhzN1pYoJ1YU8Csa" target="_blank" class="resource-tag tag-alt"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Alt: Abhishek Veeramalla DevOps</a>
+                            </div>
+                            <div class="checklist-group" data-group="sem8">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s8-3" onchange="updateAllProgress()"><span class="check-label">Docker Containerization Basics</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s8-4" onchange="updateAllProgress()"><span class="check-label">AWS EC2, S3 & Cloud Architecture</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s8-5" onchange="updateAllProgress()"><span class="check-label">CI/CD Automated Deployment Pipelines</span></label>
+                            </div>
+                        </div>
+
+                        <!-- CS-804 -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">CS-804</span>
+                                        <span class="tag-pill tag-project">Capstone</span>
+                                    </div>
+                                    <div class="subject-name">Major Project II (Capstone Project)</div>
+                                    <div class="subject-desc">Full implementation, testing, production deployment, project report & viva defense.</div>
+                                </div>
+                            </div>
+                            <div class="checklist-group" data-group="sem8">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s8-6" onchange="updateAllProgress()"><span class="check-label">Complete Production Implementation of Major Project</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s8-7" onchange="updateAllProgress()"><span class="check-label">Write Comprehensive Technical Documentation</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s8-8" onchange="updateAllProgress()"><span class="check-label">Deploy Live & Present Capstone Defense</span></label>
+                            </div>
+                        </div>
+
+                        <!-- CS-SELF4 -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">CS-SELF4</span>
+                                        <span class="tag-pill tag-coding">Career Transition</span>
+                                    </div>
+                                    <div class="subject-name">Final Career Sprints & Job Offers</div>
+                                    <div class="subject-desc">Active job applications, referral outreach, interview rounds, and job offer negotiation.</div>
+                                </div>
+                            </div>
+                            <div class="checklist-group" data-group="sem8">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s8-9" onchange="updateAllProgress()"><span class="check-label">LinkedIn Profile Optimization & Referral Networking</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s8-10" onchange="updateAllProgress()"><span class="check-label">Active Job Applications on Naukri, LinkedIn & AngelList</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s8-11" onchange="updateAllProgress()"><span class="check-label">Reach 300+ LeetCode Problems Target</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="s8-12" onchange="updateAllProgress()"><span class="check-label">Secured Software Engineering Job Offer</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CO-CURRICULAR BLOCK -->
+                <div class="semester-block" data-sem="cc" data-year="cc">
+                    <div class="semester-header-bar" onclick="toggleBlock(this)">
+                        <div class="semester-title-group">
+                            <span class="sem-badge">CO-CURRICULAR</span>
+                            <div>
+                                <div class="sem-name">Industry Preparedness & Competitive Tracks</div>
+                                <div class="sem-meta">Competitive programming, open source, hackathons, certifications & professional networking</div>
+                            </div>
+                        </div>
+                        <div class="sem-progress-info">
+                            <div class="sem-progress-bar-container">
+                                <div class="sem-progress-bar-fill" id="progress-fill-cc" style="width: 0%;"></div>
+                            </div>
+                            <span class="sem-percentage" id="progress-cc">0/9 (0%)</span>
+                            <svg class="toggle-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                    </div>
+
+                    <div class="subjects-container">
+                        <!-- CC 1 -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">CAREER-01</span>
+                                        <span class="tag-pill tag-coding">CP Track</span>
+                                    </div>
+                                    <div class="subject-name">Competitive Programming</div>
+                                    <div class="subject-desc">CodeChef, CodeForces, and LeetCode contest participation to build problem-solving speed.</div>
+                                </div>
+                            </div>
+                            <div class="checklist-group" data-group="cc">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="cc-1" onchange="updateAllProgress()"><span class="check-label">Create Accounts on CodeChef, CodeForces & LeetCode</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="cc-2" onchange="updateAllProgress()"><span class="check-label">Participate in 15+ Live Coding Contests</span></label>
+                            </div>
+                        </div>
+
+                        <!-- CC 2 -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">CAREER-02</span>
+                                        <span class="tag-pill tag-coding">Open Source</span>
+                                    </div>
+                                    <div class="subject-name">Open Source Contributions</div>
+                                    <div class="subject-desc">Contribute to open source repositories on GitHub, hacktoberfest, or GSoC.</div>
+                                </div>
+                            </div>
+                            <div class="checklist-group" data-group="cc">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="cc-3" onchange="updateAllProgress()"><span class="check-label">Submit First Merged Open Source Pull Request</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="cc-4" onchange="updateAllProgress()"><span class="check-label">Contribute to 3+ GitHub Repositories</span></label>
+                            </div>
+                        </div>
+
+                        <!-- CC 3 -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">CAREER-03</span>
+                                        <span class="tag-pill tag-project">Hackathons</span>
+                                    </div>
+                                    <div class="subject-name">Hackathons & Team Competitions</div>
+                                    <div class="subject-desc">Smart India Hackathon, MLH hackathons, and regional university coding competitions.</div>
+                                </div>
+                            </div>
+                            <div class="checklist-group" data-group="cc">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="cc-5" onchange="updateAllProgress()"><span class="check-label">Participate in 3+ Team Hackathons</span></label>
+                            </div>
+                        </div>
+
+                        <!-- CC 4 -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">CAREER-04</span>
+                                        <span class="tag-pill tag-foundation">Certifications</span>
+                                    </div>
+                                    <div class="subject-name">Industry Certifications & Courses</div>
+                                    <div class="subject-desc">AWS Certified Cloud Practitioner, Meta Frontend, Google Cloud, or IBM Data Science.</div>
+                                </div>
+                            </div>
+                            <div class="checklist-group" data-group="cc">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="cc-6" onchange="updateAllProgress()"><span class="check-label">Complete 2+ Recognized Technical Certifications</span></label>
+                            </div>
+                        </div>
+
+                        <!-- CC 5 -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">CAREER-05</span>
+                                        <span class="tag-pill tag-coding">Internships</span>
+                                    </div>
+                                    <div class="subject-name">Technical Internships</div>
+                                    <div class="subject-desc">Summer/Winter software engineering internships on Internshala, LinkedIn, or startups.</div>
+                                </div>
+                            </div>
+                            <div class="checklist-group" data-group="cc">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="cc-7" onchange="updateAllProgress()"><span class="check-label">Complete at Least 2 Software Internships</span></label>
+                            </div>
+                        </div>
+
+                        <!-- CC 6 -->
+                        <div class="subject-row">
+                            <div class="subject-top-bar">
+                                <div>
+                                    <div class="subject-meta-left">
+                                        <span class="subject-code">CAREER-06</span>
+                                        <span class="tag-pill tag-foundation">Networking</span>
+                                    </div>
+                                    <div class="subject-name">Technical Writing & Networking</div>
+                                    <div class="subject-desc">Write blogs on Hashnode / Dev.to and build developer connections on LinkedIn.</div>
+                                </div>
+                            </div>
+                            <div class="checklist-group" data-group="cc">
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="cc-8" onchange="updateAllProgress()"><span class="check-label">Write 10+ Technical Articles / Learning Logs</span></label>
+                                <label class="check-item"><input type="checkbox" class="check-input" data-id="cc-9" onchange="updateAllProgress()"><span class="check-label">Build LinkedIn Network (200+ Tech Connections)</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- ========================================== -->
+        <!-- TAB 2: ANALYTICS DASHBOARD VIEW -->
+        <!-- ========================================== -->
+        <div id="pane-dashboard" class="tab-pane">
+
+            <!-- METRIC CARDS -->
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span>Overall Completion</span>
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                    </div>
+                    <div class="metric-value" id="dashTotalPercent">0%</div>
+                    <div class="metric-footer">
+                        <span id="dashCompletedCount">0</span> of <span id="dashTotalCount">160</span> milestones completed
+                    </div>
+                    <div class="progress-mini-bar">
+                        <div class="progress-mini-fill" id="dashProgressFill" style="width: 0%;"></div>
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span>Estimated Study Hours</span>
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <div class="metric-value" id="dashStudyHours">0 hrs</div>
+                    <div class="metric-footer">Based on completed course modules</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span>Current Focus Stage</span>
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <div class="metric-value" id="dashCurrentSem">Pre-Basics</div>
+                    <div class="metric-footer">Active learning phase</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span>Core CS Mastery</span>
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    </div>
+                    <div class="metric-value" id="dashCoreMastery">0%</div>
+                    <div class="metric-footer">Data Structures, Algo, OS, DBMS</div>
+                </div>
+            </div>
+
+            <!-- CHARTS GRID -->
+            <div class="charts-grid">
+                
+                <!-- Chart 1: Semester Completion Breakdown -->
+                <div class="chart-card col-8">
+                    <div class="chart-title">Semester-wise Completion Progress</div>
+                    <div class="chart-subtitle">Percentage of completed curriculum topics across each academic semester</div>
+                    <div class="chart-container">
+                        <canvas id="semProgressChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chart 2: Domain Skill Distribution -->
+                <div class="chart-card col-4">
+                    <div class="chart-title">Subject Distribution</div>
+                    <div class="chart-subtitle">Breakdown by technical focus area</div>
+                    <div class="chart-container">
+                        <canvas id="domainChart"></canvas>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <div>
+                Built for <strong>Sushila Devi Bansal College (SDBC), Indore</strong> • Affiliated to RGPV Bhopal • Includes <a href="https://www.rgpvonline.com" target="_blank">RGPV PYQs</a>
+            </div>
+            <div>
+                Data stored locally in your browser
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- External JS Script -->
+    <script src="app.js"></script>
+</body>
+</html>
