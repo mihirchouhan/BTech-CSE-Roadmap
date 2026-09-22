@@ -32,16 +32,27 @@
             <div class="nav-tabs">
                 <button class="tab-btn active" onclick="switchTab('curriculum')">
                     <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                    Roadmap & Curriculum
+                    Roadmap
+                </button>
+                <button class="tab-btn" onclick="switchTab('myplan')">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+                    My Plan
+                </button>
+                <button class="tab-btn" onclick="switchTab('exam')">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                    Exam Mode
                 </button>
                 <button class="tab-btn" onclick="switchTab('dashboard')">
                     <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2h-12a2 2 0 00-2-2z"></path></svg>
-                    Analytics Dashboard
+                    Analytics
                 </button>
             </div>
 
             <!-- ACTIONS -->
             <div class="nav-actions">
+                <button class="btn-settings" onclick="openOnboarding()" title="Edit Profile">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                </button>
                 <button class="btn-icon" onclick="toggleTheme()" id="themeToggleBtn">
                     <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
                     <span id="themeBtnText">Light Mode</span>
@@ -85,6 +96,17 @@
                 </div>
             </div>
 
+            <div class="hero-cta-row" id="heroCta">
+                <button class="btn-primary" onclick="openOnboarding()" id="startJourneyBtn">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    Start My Journey
+                </button>
+                <button class="btn-secondary-outline" onclick="switchTab('dashboard')">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                    View Analytics
+                </button>
+            </div>
+
             <div class="motivation-card">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                 <div>
@@ -92,6 +114,38 @@
                 </div>
             </div>
         </section>
+
+        <!-- CURRENT FOCUS CARD -->
+        <div class="current-focus-card" id="currentFocusCard">
+            <div class="focus-card-header">
+                <div class="focus-card-label">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    Your Current Focus
+                </div>
+                <div class="focus-card-stage" id="focusStage"></div>
+            </div>
+            <div class="focus-card-subject" id="focusSubject"></div>
+            <div class="focus-card-milestone" id="focusMilestone"></div>
+            <div class="focus-card-progress-row">
+                <div class="focus-card-progress-bar">
+                    <div class="focus-card-progress-fill" id="focusProgressFill" style="width: 0%;"></div>
+                </div>
+                <span class="focus-card-progress-text" id="focusProgressText">0/0</span>
+                <span class="focus-card-time" id="focusTime">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <span id="focusTimeText"></span>
+                </span>
+            </div>
+            <div class="focus-card-actions">
+                <button class="btn-continue" onclick="scrollToCurrentFocus()">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Continue
+                </button>
+                <button class="btn-secondary-outline" onclick="scrollToFullRoadmap()">
+                    View Full Roadmap
+                </button>
+            </div>
+        </div>
 
         <!-- ========================================== -->
         <!-- TAB 1: CURRICULUM ROADMAP VIEW -->
@@ -126,7 +180,7 @@
                         <div class="semester-title-group">
                             <span class="sem-badge">PRE</span>
                             <div>
-                                <div class="sem-name">Pre-BTech Fundamentals & Bridge Modules</div>
+                                <div class="sem-name">Pre-BTech Fundamentals & Bridge Modules <span class="stage-badge" data-stage-sem="pre"></span></div>
                                 <div class="sem-meta">Essential prerequisite topics in mathematics, physics, chemistry, basic computer operation, and communication</div>
                             </div>
                         </div>
@@ -250,7 +304,7 @@
                         <div class="semester-title-group">
                             <span class="sem-badge">SEM 1</span>
                             <div>
-                                <div class="sem-name">Semester I — Engineering Foundations</div>
+                                <div class="sem-name">Semester I — Engineering Foundations <span class="stage-badge" data-stage-sem="sem1"></span></div>
                                 <div class="sem-meta">RGPV First-Year Common Courses + Self-Directed C Programming</div>
                             </div>
                         </div>
@@ -425,7 +479,7 @@
                         <div class="semester-title-group">
                             <span class="sem-badge">SEM 2</span>
                             <div>
-                                <div class="sem-name">Semester II — Physical Sciences & Python Programming</div>
+                                <div class="sem-name">Semester II — Physical Sciences & Python Programming <span class="stage-badge" data-stage-sem="sem2"></span></div>
                                 <div class="sem-meta">Physics, Advanced Math, Basic Mechanical/Civil & Python Fundamentals</div>
                             </div>
                         </div>
@@ -549,7 +603,7 @@
                         <div class="semester-title-group">
                             <span class="sem-badge">SEM 3</span>
                             <div>
-                                <div class="sem-name">Semester III — Core Computer Science</div>
+                                <div class="sem-name">Semester III — Core Computer Science <span class="stage-badge" data-stage-sem="sem3"></span></div>
                                 <div class="sem-meta">Data Structures, Discrete Structures, Object-Oriented Programming, Digital Logic & Environmental Engg</div>
                             </div>
                         </div>
@@ -701,7 +755,7 @@
                         <div class="semester-title-group">
                             <span class="sem-badge">SEM 4</span>
                             <div>
-                                <div class="sem-name">Semester IV — Algorithms & Operating Systems</div>
+                                <div class="sem-name">Semester IV — Algorithms & Operating Systems <span class="stage-badge" data-stage-sem="sem4"></span></div>
                                 <div class="sem-meta">Analysis & Design of Algorithms (ADA), Operating Systems, Architecture (COA), Software Engg & Math-III</div>
                             </div>
                         </div>
@@ -845,7 +899,7 @@
                         <div class="semester-title-group">
                             <span class="sem-badge">SEM 5</span>
                             <div>
-                                <div class="sem-name">Semester V — Database Systems & Web Development</div>
+                                <div class="sem-name">Semester V — Database Systems & Web Development <span class="stage-badge" data-stage-sem="sem5"></span></div>
                                 <div class="sem-meta">DBMS, Theory of Computation (TOC), Electives, Linux Lab & Full-Stack Web Dev Track</div>
                             </div>
                         </div>
@@ -969,7 +1023,7 @@
                         <div class="semester-title-group">
                             <span class="sem-badge">SEM 6</span>
                             <div>
-                                <div class="sem-name">Semester VI — Networks & Machine Learning</div>
+                                <div class="sem-name">Semester VI — Networks & Machine Learning <span class="stage-badge" data-stage-sem="sem6"></span></div>
                                 <div class="sem-meta">Computer Networks, Machine Learning, Compiler Design, Data Analytics & Minor Project II</div>
                             </div>
                         </div>
@@ -1089,7 +1143,7 @@
                         <div class="semester-title-group">
                             <span class="sem-badge">SEM 7</span>
                             <div>
-                                <div class="sem-name">Semester VII — Placement Sprint & System Architecture</div>
+                                <div class="sem-name">Semester VII — Placement Sprint & System Architecture <span class="stage-badge" data-stage-sem="sem7"></span></div>
                                 <div class="sem-meta">Software Architecture, Placement Preparation, Electives & Major Project I</div>
                             </div>
                         </div>
@@ -1205,7 +1259,7 @@
                         <div class="semester-title-group">
                             <span class="sem-badge">SEM 8</span>
                             <div>
-                                <div class="sem-name">Semester VIII — Capstone & Career Transition</div>
+                                <div class="sem-name">Semester VIII — Capstone & Career Transition <span class="stage-badge" data-stage-sem="sem8"></span></div>
                                 <div class="sem-meta">IoT, Cloud Computing, Major Project II & Final Placement Sprint</div>
                             </div>
                         </div>
@@ -1313,7 +1367,7 @@
                         <div class="semester-title-group">
                             <span class="sem-badge">CO-CURRICULAR</span>
                             <div>
-                                <div class="sem-name">Industry Preparedness & Competitive Tracks</div>
+                                <div class="sem-name">Industry Preparedness & Competitive Tracks <span class="stage-badge" data-stage-sem="cc"></span></div>
                                 <div class="sem-meta">Competitive programming, open source, hackathons, certifications & professional networking</div>
                             </div>
                         </div>
@@ -1439,7 +1493,202 @@
 
 
         <!-- ========================================== -->
-        <!-- TAB 2: ANALYTICS DASHBOARD VIEW -->
+        <!-- TAB: MY PLAN — Daily Tasks & Progress -->
+        <!-- ========================================== -->
+        <div id="pane-myplan" class="tab-pane">
+
+            <!-- Plan Header -->
+            <div class="plan-header">
+                <div class="plan-header-left">
+                    <h2 class="plan-title">Today's Plan</h2>
+                    <p class="plan-subtitle" id="planDate"></p>
+                </div>
+                <div class="plan-header-right">
+                    <div class="plan-streak-badge" id="planStreakBadge">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"></path></svg>
+                        <span id="planStreakCount">0</span> day streak
+                    </div>
+                </div>
+            </div>
+
+            <!-- Plan Stage Context -->
+            <div class="plan-stage-context" id="planStageContext">
+                <div class="plan-stage-label">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    <span id="planStageName">Loading...</span>
+                </div>
+                <div class="plan-stage-progress">
+                    <div class="plan-stage-bar">
+                        <div class="plan-stage-bar-fill" id="planStageBarFill" style="width: 0%;"></div>
+                    </div>
+                    <span class="plan-stage-pct" id="planStagePct">0%</span>
+                </div>
+            </div>
+
+            <!-- Today's Tasks -->
+            <div class="plan-tasks-section">
+                <div class="plan-tasks-header">
+                    <span class="plan-tasks-count" id="planTasksLabel">3 tasks for today</span>
+                    <span class="plan-tasks-time" id="planTasksTime">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        ~0 min
+                    </span>
+                </div>
+                <div class="plan-tasks-list" id="planTasksList">
+                    <!-- Dynamically filled by app.js -->
+                </div>
+            </div>
+
+            <!-- Yesterday Summary -->
+            <div class="plan-yesterday" id="planYesterday">
+                <div class="plan-yesterday-header">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Yesterday
+                </div>
+                <span class="plan-yesterday-result" id="planYesterdayResult">No data</span>
+            </div>
+
+            <!-- This Week Overview -->
+            <div class="plan-week-section">
+                <h3 class="plan-week-title">This Week</h3>
+                <div class="plan-week-grid" id="planWeekGrid">
+                    <!-- 7 day dots filled by JS -->
+                </div>
+                <div class="plan-week-stats">
+                    <span id="planWeekCompleted">0 tasks completed</span>
+                    <span id="planWeekTotal">this week</span>
+                </div>
+            </div>
+
+            <!-- What's Not Needed Yet -->
+            <div class="plan-later-section" id="planLaterSection">
+                <h3 class="plan-later-title">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Not needed yet
+                </h3>
+                <p class="plan-later-desc" id="planLaterDesc">Focus on your current semester. These will become relevant later.</p>
+                <div class="plan-later-items" id="planLaterItems">
+                    <!-- Filled by JS -->
+                </div>
+            </div>
+
+            <!-- No Profile State -->
+            <div class="plan-empty-state" id="planEmptyState" style="display:none;">
+                <div class="plan-empty-icon">
+                    <svg width="48" height="48" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+                </div>
+                <h3 class="plan-empty-title">Set up your profile first</h3>
+                <p class="plan-empty-desc">Complete the onboarding to get a personalized daily plan based on your semester, goals, and available time.</p>
+                <button class="btn-primary" onclick="openOnboarding()">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    Start My Journey
+                </button>
+            </div>
+        </div>
+
+
+        <!-- ========================================== -->
+        <!-- TAB: EXAM MODE -->
+        <!-- ========================================== -->
+        <div id="pane-exam" class="tab-pane">
+
+            <!-- Exam Countdown -->
+            <div class="exam-countdown-section">
+                <div class="exam-countdown-header">
+                    <div class="exam-countdown-title-row">
+                        <h2 class="exam-countdown-title">Exam Countdown</h2>
+                        <span class="exam-countdown-semester" id="examSemLabel"></span>
+                    </div>
+                    <div class="exam-countdown-set">
+                        <label class="exam-date-label" for="examDateInput">Exam starts</label>
+                        <input type="date" id="examDateInput" class="exam-date-input" onchange="saveExamDate()">
+                    </div>
+                </div>
+                <div class="exam-countdown-timer" id="examCountdownTimer">
+                    <div class="countdown-unit">
+                        <span class="countdown-number" id="countdownDays">--</span>
+                        <span class="countdown-label">days</span>
+                    </div>
+                    <div class="countdown-separator">:</div>
+                    <div class="countdown-unit">
+                        <span class="countdown-number" id="countdownHours">--</span>
+                        <span class="countdown-label">hrs</span>
+                    </div>
+                    <div class="countdown-separator">:</div>
+                    <div class="countdown-unit">
+                        <span class="countdown-number" id="countdownMins">--</span>
+                        <span class="countdown-label">min</span>
+                    </div>
+                </div>
+                <p class="exam-countdown-hint" id="examCountdownHint">Set your exam date above to start the countdown.</p>
+            </div>
+
+            <!-- Quick PYQ Access -->
+            <div class="exam-pyq-panel">
+                <div class="exam-pyq-header">
+                    <h3 class="exam-pyq-title">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                        Previous Year Papers
+                    </h3>
+                    <span class="exam-pyq-count" id="examPyqCount">0 subjects</span>
+                </div>
+                <div class="exam-pyq-grid" id="examPyqGrid">
+                    <!-- Filled by JS -->
+                </div>
+            </div>
+
+            <!-- Subject-wise Exam Cards -->
+            <div class="exam-subjects-section">
+                <h3 class="exam-subjects-title">Unit-wise Revision</h3>
+                <p class="exam-subjects-desc" id="examSubjectsDesc">Your current semester subjects with topic-level tracking for exam preparation.</p>
+                <div class="exam-subjects-list" id="examSubjectsList">
+                    <!-- Dynamically populated by JS -->
+                </div>
+            </div>
+
+            <!-- Exam Tips -->
+            <div class="exam-tips-section">
+                <h3 class="exam-tips-title">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                    RGPV Exam Strategy
+                </h3>
+                <div class="exam-tips-grid">
+                    <div class="exam-tip-card">
+                        <div class="exam-tip-number">1</div>
+                        <div class="exam-tip-text"><strong>Solve PYQs first.</strong> RGPV repeats 40-60% of questions. Start with the last 3 years.</div>
+                    </div>
+                    <div class="exam-tip-card">
+                        <div class="exam-tip-number">2</div>
+                        <div class="exam-tip-text"><strong>Focus on units, not chapters.</strong> Each unit carries equal marks. Cover all 5 units even if superficially.</div>
+                    </div>
+                    <div class="exam-tip-card">
+                        <div class="exam-tip-number">3</div>
+                        <div class="exam-tip-text"><strong>Write readable answers.</strong> Use diagrams, headings, and bullet points. Presentation matters for scoring.</div>
+                    </div>
+                    <div class="exam-tip-card">
+                        <div class="exam-tip-number">4</div>
+                        <div class="exam-tip-text"><strong>Attempt all questions.</strong> There is no negative marking. Write something for every question.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- No Profile State -->
+            <div class="exam-empty-state" id="examEmptyState" style="display:none;">
+                <div class="plan-empty-icon">
+                    <svg width="48" height="48" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                </div>
+                <h3 class="plan-empty-title">Set up your profile first</h3>
+                <p class="plan-empty-desc">Complete the onboarding to see exam-focused content for your current semester.</p>
+                <button class="btn-primary" onclick="openOnboarding()">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    Start My Journey
+                </button>
+            </div>
+        </div>
+
+
+        <!-- ========================================== -->
+        <!-- TAB: ANALYTICS DASHBOARD VIEW -->
         <!-- ========================================== -->
         <div id="pane-dashboard" class="tab-pane">
 
@@ -1523,6 +1772,14 @@
         </footer>
 
     </main>
+
+
+    <!-- ONBOARDING MODAL -->
+    <div class="onboarding-overlay" id="onboardingOverlay">
+        <div class="onboarding-modal" id="onboardingModal">
+            <!-- Dynamically rendered by app.js -->
+        </div>
+    </div>
 
     <!-- External JS Script -->
     <script src="app.js"></script>
