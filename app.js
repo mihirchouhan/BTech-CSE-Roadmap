@@ -21,15 +21,222 @@ try {
 // ============================================================
 // FIREBASE AUTH FUNCTIONS
 // ============================================================
+
+// ---- Auth Modal Controls ----
+function openAuthModal(tab = 'login') {
+    const overlay = document.getElementById('authOverlay');
+    if (overlay) overlay.classList.add('active');
+    switchAuthTab(tab);
+    // Focus first input after animation
+    setTimeout(() => {
+        const firstInput = document.querySelector('#authOverlay .auth-panel:not(.hidden) input');
+        if (firstInput) firstInput.focus();
+    }, 300);
+}
+
+function closeAuthModal() {
+    const overlay = document.getElementById('authOverlay');
+    if (overlay) overlay.classList.remove('active');
+    // Clear errors
+    ['loginError','registerError','resetError'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) { el.textContent = ''; el.classList.remove('visible'); }
+    });
+    const success = document.getElementById('resetSuccess');
+    if (success) { success.textContent = ''; success.classList.remove('visible'); }
+}
+
+function closeAuthOnOverlay(e) {
+    if (e.target.id === 'authOverlay') closeAuthModal();
+}
+
+function switchAuthTab(tab) {
+    // Hide all panels
+    ['Login','Register','Reset','Verify'].forEach(name => {
+        const panel = document.getElementById(`authPanel${name}`);
+        if (panel) panel.classList.add('hidden');
+    });
+    // Update tab buttons
+    document.querySelectorAll('.auth-tab').forEach(btn => btn.classList.remove('active'));
+
+    if (tab === 'login') {
+        document.getElementById('authPanelLogin')?.classList.remove('hidden');
+        document.getElementById('authTabLogin')?.classList.add('active');
+    } else if (tab === 'register') {
+        document.getElementById('authPanelRegister')?.classList.remove('hidden');
+        document.getElementById('authTabRegister')?.classList.add('active');
+    } else if (tab === 'reset') {
+        document.getElementById('authPanelReset')?.classList.remove('hidden');
+    } else if (tab === 'verify') {
+        document.getElementById('authPanelVerify')?.classList.remove('hidden');
+    }
+}
+
+// Keyboard Escape to close
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        const authOverlay = document.getElementById('authOverlay');
+        if (authOverlay?.classList.contains('active')) closeAuthModal();
+    }
+});
+
+// ---- Google Sign-In ----
 function signInWithGoogle() {
     if (!firebaseAuth) return;
     const provider = new firebase.auth.GoogleAuthProvider();
-    firebaseAuth.signInWithPopup(provider).catch(err => {
-        console.error('Sign-in error:', err);
-        showBadgeToast({ icon: '⚠️', name: 'Sign-in Failed', desc: err.message || 'Could not sign in. Please try again.' });
-    });
+    firebaseAuth.signInWithPopup(provider)
+        .then(() => closeAuthModal())
+        .catch(err => {
+            console.error('Sign-in error:', err);
+            showAuthError('loginError', friendlyAuthError(err.code));
+        });
 }
 
+// ---- Email/Password Login ----
+async function handleEmailLogin(e) {
+    e.preventDefault();
+    if (!firebaseAuth) return;
+    const email = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPassword').value;
+    const btn = document.getElementById('loginSubmitBtn');
+    clearAuthError('loginError');
+    setAuthBtnLoading(btn, true, 'Signing in...');
+    try {
+        const cred = await firebaseAuth.signInWithEmailAndPassword(email, password);
+        if (!cred.user.emailVerified) {
+            switchAuthTab('verify');
+            document.getElementById('authVerifyMsg').textContent =
+                `Please verify your email (${email}) before continuing. Check your inbox.`;
+        } else {
+            closeAuthModal();
+        }
+    } catch(err) {
+        showAuthError('loginError', friendlyAuthError(err.code));
+    } finally {
+        setAuthBtnLoading(btn, false, 'Sign In');
+    }
+}
+
+// ---- Email/Password Register ----
+async function handleEmailRegister(e) {
+    e.preventDefault();
+    if (!firebaseAuth) return;
+    const name = document.getElementById('registerName').value.trim();
+    const email = document.getElementById('registerEmail').value.trim();
+    const password = document.getElementById('registerPassword').value;
+    const btn = document.getElementById('registerSubmitBtn');
+    clearAuthError('registerError');
+    setAuthBtnLoading(btn, true, 'Creating account...');
+    try {
+        const cred = await firebaseAuth.createUserWithEmailAndPassword(email, password);
+        // Set display name
+        await cred.user.updateProfile({ displayName: name });
+        // Send verification email
+        await cred.user.sendEmailVerification();
+        switchAuthTab('verify');
+        document.getElementById('authVerifyMsg').textContent =
+            `We sent a verification link to ${email}. Please check your inbox and click the link to activate your account.`;
+    } catch(err) {
+        showAuthError('registerError', friendlyAuthError(err.code));
+    } finally {
+        setAuthBtnLoading(btn, false, 'Create Account');
+    }
+}
+
+// ---- Password Reset ----
+async function handlePasswordReset(e) {
+    e.preventDefault();
+    if (!firebaseAuth) return;
+    const email = document.getElementById('resetEmail').value.trim();
+    const btn = document.getElementById('resetSubmitBtn');
+    const successEl = document.getElementById('resetSuccess');
+    clearAuthError('resetError');
+    if (successEl) { successEl.textContent = ''; successEl.classList.remove('visible'); }
+    setAuthBtnLoading(btn, true, 'Sending...');
+    try {
+        await firebaseAuth.sendPasswordResetEmail(email);
+        if (successEl) {
+            successEl.textContent = `✓ Reset link sent to ${email}. Check your inbox (and spam folder).`;
+            successEl.classList.add('visible');
+        }
+    } catch(err) {
+        showAuthError('resetError', friendlyAuthError(err.code));
+    } finally {
+        setAuthBtnLoading(btn, false, 'Send Reset Link');
+    }
+}
+
+// ---- Resend Verification ----
+async function resendVerificationEmail() {
+    if (!firebaseAuth || !firebaseAuth.currentUser) return;
+    try {
+        await firebaseAuth.currentUser.sendEmailVerification();
+        showBadgeToast({ icon: '📧', name: 'Email Sent!', desc: 'Verification email resent. Check your inbox.' });
+    } catch(err) {
+        showBadgeToast({ icon: '⚠️', name: 'Error', desc: err.message });
+    }
+}
+
+// ---- Password Strength Meter ----
+function checkPasswordStrength(password) {
+    const bar = document.getElementById('passwordStrength');
+    if (!bar) return;
+    let score = 0;
+    if (password.length >= 8) score++;
+    if (/[A-Z]/.test(password)) score++;
+    if (/[0-9]/.test(password)) score++;
+    if (/[^A-Za-z0-9]/.test(password)) score++;
+    const widths = ['0%', '25%', '50%', '75%', '100%'];
+    const colors = ['var(--danger)', 'var(--danger)', 'var(--warning)', 'var(--info)', 'var(--accent)'];
+    bar.style.setProperty('--strength-width', widths[score]);
+    bar.style.setProperty('--strength-color', colors[score]);
+}
+
+// ---- Password Visibility Toggle ----
+function togglePasswordVisibility(inputId, btn) {
+    const input = document.getElementById(inputId);
+    if (!input) return;
+    const isHidden = input.type === 'password';
+    input.type = isHidden ? 'text' : 'password';
+    btn.querySelector('svg').style.opacity = isHidden ? '0.4' : '1';
+}
+
+// ---- Auth Helpers ----
+function showAuthError(elementId, message) {
+    const el = document.getElementById(elementId);
+    if (el) { el.textContent = message; el.classList.add('visible'); }
+}
+
+function clearAuthError(elementId) {
+    const el = document.getElementById(elementId);
+    if (el) { el.textContent = ''; el.classList.remove('visible'); }
+}
+
+function setAuthBtnLoading(btn, loading, label) {
+    if (!btn) return;
+    btn.disabled = loading;
+    btn.innerHTML = loading
+        ? `<svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="animation:spin 1s linear infinite"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m0 14v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg> ${label}`
+        : `<span>${label}</span>`;
+}
+
+function friendlyAuthError(code) {
+    const messages = {
+        'auth/user-not-found':       'No account found with this email.',
+        'auth/wrong-password':       'Incorrect password. Try again or reset it.',
+        'auth/invalid-credential':   'Incorrect email or password.',
+        'auth/email-already-in-use': 'An account with this email already exists.',
+        'auth/weak-password':        'Password must be at least 6 characters.',
+        'auth/invalid-email':        'Please enter a valid email address.',
+        'auth/too-many-requests':    'Too many attempts. Please wait a moment and try again.',
+        'auth/network-request-failed': 'Network error. Check your internet connection.',
+        'auth/popup-closed-by-user': 'Sign-in was cancelled.',
+        'auth/popup-blocked':        'Sign-in popup was blocked. Please allow popups for this site.',
+    };
+    return messages[code] || 'Something went wrong. Please try again.';
+}
+
+// ---- Sign-Out ----
 function signOutUser() {
     if (!firebaseAuth) return;
     closeUserMenu();
@@ -58,7 +265,8 @@ function onAuthStateChanged(user) {
     const avatarArea = document.getElementById('userAvatarArea');
 
     if (user) {
-        // User signed in
+        // User signed in — close auth modal
+        closeAuthModal();
         if (signInBtn) signInBtn.style.display = 'none';
         if (avatarArea) avatarArea.style.display = 'flex';
 
