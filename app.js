@@ -1,9 +1,218 @@
+// ============================================================
+// FIREBASE CONFIGURATION & INITIALIZATION
+// ============================================================
+const firebaseConfig = {
+    apiKey: "AIzaSyCoScmVz1km6cTzP3EJ-DXNVSRWDQcXy_s",
+    authDomain: "rgpv-roadmap.firebaseapp.com",
+    projectId: "rgpv-roadmap",
+    storageBucket: "rgpv-roadmap.firebasestorage.app",
+    messagingSenderId: "783162717041",
+    appId: "1:783162717041:web:9b6863854cd37c8af6fcd0",
+    measurementId: "G-JZRDRB2VXJ"
+};
+
+let firebaseApp, firebaseAuth, firebaseDb;
+let currentUser = null;
+let firestoreDebounceTimer = null;
+
+try {
+    firebaseApp = firebase.initializeApp(firebaseConfig);
+    firebaseAuth = firebase.auth();
+    firebaseDb = firebase.firestore();
+} catch(e) {
+    console.warn('Firebase init failed:', e);
+}
+
+// ============================================================
+// FIREBASE AUTH FUNCTIONS
+// ============================================================
+function signInWithGoogle() {
+    if (!firebaseAuth) return;
+    const provider = new firebase.auth.GoogleAuthProvider();
+    firebaseAuth.signInWithPopup(provider).catch(err => {
+        console.error('Sign-in error:', err);
+        showBadgeToast({ icon: '⚠️', name: 'Sign-in Failed', desc: err.message || 'Could not sign in. Please try again.' });
+    });
+}
+
+function signOutUser() {
+    if (!firebaseAuth) return;
+    closeUserMenu();
+    firebaseAuth.signOut().then(() => {
+        showBadgeToast({ icon: '👋', name: 'Signed Out', desc: 'Your progress is safely saved in the cloud.' });
+    });
+}
+
+function toggleUserMenu() {
+    const dd = document.getElementById('userDropdown');
+    if (dd) dd.classList.toggle('open');
+}
+
+function closeUserMenu() {
+    const dd = document.getElementById('userDropdown');
+    if (dd) dd.classList.remove('open');
+}
+
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.user-avatar-area')) closeUserMenu();
+});
+
+function onAuthStateChanged(user) {
+    currentUser = user;
+    const signInBtn = document.getElementById('btnGoogleSignIn');
+    const avatarArea = document.getElementById('userAvatarArea');
+
+    if (user) {
+        // User signed in
+        if (signInBtn) signInBtn.style.display = 'none';
+        if (avatarArea) avatarArea.style.display = 'flex';
+
+        const avatarImg = document.getElementById('userAvatarImg');
+        const displayName = document.getElementById('userDisplayName');
+        const dropAvatar = document.getElementById('userDropAvatarImg');
+        const dropName = document.getElementById('userDropName');
+        const dropEmail = document.getElementById('userDropEmail');
+
+        if (avatarImg && user.photoURL) avatarImg.src = user.photoURL;
+        if (dropAvatar && user.photoURL) dropAvatar.src = user.photoURL;
+        if (displayName) displayName.textContent = user.displayName ? user.displayName.split(' ')[0] : 'User';
+        if (dropName) dropName.textContent = user.displayName || 'User';
+        if (dropEmail) dropEmail.textContent = user.email || '';
+
+        // Load progress from Firestore (first time: migrate from localStorage)
+        loadProgressFromFirestore();
+    } else {
+        // User signed out
+        if (signInBtn) signInBtn.style.display = 'flex';
+        if (avatarArea) avatarArea.style.display = 'none';
+    }
+}
+
+// ============================================================
+// FIRESTORE SYNC FUNCTIONS
+// ============================================================
+function getUserDoc() {
+    if (!firebaseDb || !currentUser) return null;
+    return firebaseDb.collection('users').doc(currentUser.uid);
+}
+
+async function loadProgressFromFirestore() {
+    const docRef = getUserDoc();
+    if (!docRef) return;
+
+    setSyncStatus('syncing');
+    try {
+        const doc = await docRef.get();
+        if (doc.exists) {
+            const data = doc.data();
+            // Write Firestore data into localStorage as the source of truth
+            if (data.progress)  localStorage.setItem(STORAGE_KEY, JSON.stringify(data.progress));
+            if (data.profile)   localStorage.setItem(PROFILE_KEY, JSON.stringify(data.profile));
+            if (data.streak)    localStorage.setItem(STREAK_KEY, JSON.stringify(data.streak));
+            if (data.plan)      localStorage.setItem(PLAN_KEY, JSON.stringify(data.plan));
+            if (data.badges)    localStorage.setItem(UNLOCKED_BADGES_KEY, JSON.stringify(data.badges));
+
+            // Re-render with cloud data
+            loadCheckboxes();
+            const profile = getStudentProfile();
+            if (profile && profile.onboardingComplete) applyStudentProfile();
+            renderBadgesGrid();
+            showBadgeToast({ icon: '☁️', name: 'Progress Loaded!', desc: 'Your saved progress has been restored from the cloud.' });
+        } else {
+            // First time login — migrate localStorage up to Firestore
+            await migrateLocalStorageToFirestore();
+        }
+        setSyncStatus('synced');
+    } catch(e) {
+        console.warn('Firestore load error:', e);
+        setSyncStatus('error');
+    }
+}
+
+async function migrateLocalStorageToFirestore() {
+    const docRef = getUserDoc();
+    if (!docRef) return;
+
+    const localProgress = getSavedProgress();
+    const localProfile = getStudentProfile();
+    const localStreak = getStreakData();
+    const localPlan = getDailyPlanData();
+    const localBadges = getUnlockedBadges();
+
+    const hasLocalData = Object.keys(localProgress).length > 0 || localProfile;
+
+    try {
+        await docRef.set({
+            progress: localProgress,
+            profile: localProfile || {},
+            streak: localStreak,
+            plan: localPlan,
+            badges: localBadges,
+            lastUpdated: firebase.firestore.FieldValue.serverTimestamp(),
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        if (hasLocalData) {
+            showBadgeToast({ icon: '🔄', name: 'Progress Migrated!', desc: 'Your local progress has been saved to your account.' });
+        } else {
+            showBadgeToast({ icon: '✅', name: 'Account Ready!', desc: 'Your progress will now be saved automatically to the cloud.' });
+        }
+        setSyncStatus('synced');
+    } catch(e) {
+        console.warn('Migration error:', e);
+        setSyncStatus('error');
+    }
+}
+
+function saveToFirestore() {
+    const docRef = getUserDoc();
+    if (!docRef) return; // Not signed in — localStorage only
+
+    // Debounce: wait 1.5s after last change before writing
+    clearTimeout(firestoreDebounceTimer);
+    setSyncStatus('syncing');
+    firestoreDebounceTimer = setTimeout(async () => {
+        try {
+            await docRef.set({
+                progress: getSavedProgress(),
+                profile: getStudentProfile() || {},
+                streak: getStreakData(),
+                plan: getDailyPlanData(),
+                badges: getUnlockedBadges(),
+                lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
+            }, { merge: true });
+            setSyncStatus('synced');
+        } catch(e) {
+            console.warn('Firestore save error:', e);
+            setSyncStatus('error');
+        }
+    }, 1500);
+}
+
+function setSyncStatus(status) {
+    const dot = document.querySelector('#syncStatusIndicator .sync-dot');
+    const text = document.getElementById('syncStatusText');
+    if (!dot || !text) return;
+    dot.className = 'sync-dot';
+    if (status === 'synced') {
+        dot.classList.add('synced');
+        text.textContent = 'Progress synced to cloud ✓';
+    } else if (status === 'syncing') {
+        dot.classList.add('syncing');
+        text.textContent = 'Saving to cloud...';
+    } else {
+        dot.classList.add('error');
+        text.textContent = 'Sync error — using local copy';
+    }
+}
+
 const STORAGE_KEY = 'rgpv_btech_roadmap_progress_v3';
 const THEME_KEY = 'rgpv_btech_roadmap_theme';
 const PROFILE_KEY = 'rgpv_student_profile';
 const PLAN_KEY = 'rgpv_daily_plan';
 const STREAK_KEY = 'rgpv_study_streak';
 const EXAM_DATE_KEY = 'rgpv_exam_date';
+
 
 let semChartInstance = null;
 let domainChartInstance = null;
@@ -71,6 +280,7 @@ function switchTab(tabId) {
         myplan:     { btnIdx: 1, paneId: 'pane-myplan' },
         exam:       { btnIdx: 2, paneId: 'pane-exam' },
         dashboard:  { btnIdx: 3, paneId: 'pane-dashboard' },
+        placement:  { btnIdx: 4, paneId: 'pane-placement' },
     };
 
     const tab = tabMap[tabId] || tabMap.curriculum;
@@ -79,7 +289,15 @@ function switchTab(tabId) {
     const pane = document.getElementById(tab.paneId);
     if (pane) pane.classList.add('active');
 
-    if (tabId === 'dashboard') renderDashboardCharts();
+    // Sync RisingBrain-style sheet tab card
+    document.querySelectorAll('.sheet-tab-card').forEach(card => card.classList.remove('active'));
+    const activeSheetCard = document.getElementById(`sheetTab-${tabId}`);
+    if (activeSheetCard) activeSheetCard.classList.add('active');
+
+    if (tabId === 'dashboard') {
+        renderDashboardCharts();
+        renderBadgesGrid();
+    }
     if (tabId === 'myplan') renderMyPlan();
     if (tabId === 'exam') renderExamMode();
 }
@@ -109,18 +327,77 @@ function setFilter(filterKey, el) {
 // SEARCH FUNCTIONALITY (preserved from original)
 // ============================================================
 function filterSubjects() {
-    const query = document.getElementById('searchInput').value.toLowerCase();
+    const searchInput = document.getElementById('searchInput');
+    if (!searchInput) return;
+    
+    const query = searchInput.value.toLowerCase();
     const rows = document.querySelectorAll('.subject-row');
+    let hasMatches = false;
 
     rows.forEach(row => {
+        // Exclude career path & placement prep rows which also use .subject-row
+        if (row.closest('#pane-placement')) return;
+
         const text = row.innerText.toLowerCase();
         if (text.includes(query)) {
             row.style.display = 'flex';
+            hasMatches = true;
         } else {
             row.style.display = 'none';
         }
     });
+
+    // Hide empty semester blocks so fallback UI is visible at the top
+    const blocks = document.querySelectorAll('.semester-block');
+    blocks.forEach(block => {
+        const visibleRows = Array.from(block.querySelectorAll('.subject-row')).filter(r => r.style.display !== 'none');
+        if (query.trim() !== '' && visibleRows.length === 0) {
+            block.style.display = 'none';
+        } else {
+            block.style.display = 'block';
+        }
+    });
+
+    const fallback = document.getElementById('searchFallback');
+    const fallbackQuery = document.getElementById('fallbackQuery');
+    
+    if (fallback && fallbackQuery) {
+        if (!hasMatches && query.trim() !== '') {
+            fallback.style.display = 'block';
+            fallbackQuery.textContent = searchInput.value;
+        } else {
+            fallback.style.display = 'none';
+        }
+    }
 }
+
+function searchExternal(platform) {
+    const query = document.getElementById('searchInput').value;
+    if (!query) return;
+
+    let url = '';
+    if (platform === 'youtube') {
+        url = `https://www.youtube.com/results?search_query=${encodeURIComponent(query + ' RGPV')}`;
+    } else if (platform === 'google') {
+        url = `https://www.google.com/search?q=${encodeURIComponent(query + ' geeksforgeeks OR tutorialspoint')}`;
+    }
+    
+    window.open(url, '_blank');
+}
+
+// Global hotkey for Command Palette / Search
+document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        // Always switch to curriculum tab to search
+        switchTab('curriculum');
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput) {
+            searchInput.focus();
+            searchInput.select();
+        }
+    }
+});
 
 // ============================================================
 // ACCORDION TOGGLE (preserved from original)
@@ -144,6 +421,7 @@ function getSavedProgress() {
 
 function saveProgress(data) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    saveToFirestore(); // Sync to cloud if logged in
 }
 
 function loadCheckboxes() {
@@ -193,6 +471,7 @@ function updateAllProgress() {
     updateDashboardMetrics(totalCheckedAll, totalItemsAll);
     updateCurrentFocusCard();
     trackDailyActivity();
+    checkAchievements(totalCheckedAll, totalItemsAll);
     // Update My Plan if visible
     if (document.getElementById('pane-myplan') && document.getElementById('pane-myplan').classList.contains('active')) {
         renderMyPlan();
@@ -214,6 +493,9 @@ function updateDashboardMetrics(completedCount, totalCount) {
 
     const dashTotCount = document.getElementById('dashTotalCount');
     if (dashTotCount) dashTotCount.textContent = totalCount;
+
+    const sheetMeta = document.getElementById('sheetMetaProgress');
+    if (sheetMeta) sheetMeta.textContent = `${completedCount} / ${totalCount} milestones`;
 
     const dashFill = document.getElementById('dashProgressFill');
     if (dashFill) dashFill.style.width = `${totalPercent}%`;
@@ -241,6 +523,91 @@ function updateDashboardMetrics(completedCount, totalCount) {
 
     const dashCore = document.getElementById('dashCoreMastery');
     if (dashCore) dashCore.textContent = `${corePct}%`;
+
+    // Phase 5 & 8: Streak updates (Dashboard & Nav)
+    const streakData = getStreakData();
+    const dashStreak = document.getElementById('dashCurrentStreak');
+    if (dashStreak) dashStreak.innerHTML = `${streakData.streak || 0} <span style="font-size: 1rem;">days</span>`;
+
+    const navStreak = document.getElementById('navStreakCount');
+    if (navStreak) navStreak.textContent = streakData.streak || 0;
+
+    generateDashboardInsights();
+}
+
+function generateDashboardInsights() {
+    const recsContainer = document.getElementById('dashRecommendations');
+    const weakContainer = document.getElementById('dashWeakAreas');
+    if (!recsContainer || !weakContainer) return;
+
+    let recsHtml = '';
+    let weakHtml = '';
+
+    // Next Best Action (First 2 incomplete items across active semesters)
+    const allItems = Array.from(document.querySelectorAll('.check-item'));
+    const incomplete = allItems.filter(item => !item.querySelector('.check-input').checked);
+    
+    if (incomplete.length > 0) {
+        incomplete.slice(0, 2).forEach(item => {
+            const label = item.querySelector('.check-label').textContent;
+            const subjectName = item.closest('.subject-row').querySelector('.subject-name').textContent;
+            recsHtml += `
+                <div class="insight-item recommend" onclick="switchTab('curriculum'); setTimeout(()=>item.scrollIntoView({behavior:'smooth'}), 100);">
+                    <div class="insight-item-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <div class="insight-item-content">
+                        <div class="insight-item-title">${label}</div>
+                        <div class="insight-item-meta">${subjectName}</div>
+                    </div>
+                </div>
+            `;
+        });
+    } else {
+        recsHtml = `<div class="insight-desc">You are completely up to date! Great job.</div>`;
+    }
+
+    // Pending Backlog (Incomplete items in past semesters)
+    // We determine past semesters by finding the last semester that has at least 1 checked item.
+    let lastActiveSemIndex = -1;
+    const semesters = ['pre', 'sem1', 'sem2', 'sem3', 'sem4', 'sem5', 'sem6', 'sem7', 'sem8'];
+    
+    semesters.forEach((sem, idx) => {
+        if (getGroupPct(sem) > 0) lastActiveSemIndex = idx;
+    });
+
+    if (lastActiveSemIndex > 0) {
+        let backlogFound = 0;
+        for (let i = 0; i < lastActiveSemIndex; i++) {
+            const pastSem = semesters[i];
+            const pastIncomplete = document.querySelectorAll(`[data-group="${pastSem}"] .check-input:not(:checked)`);
+            pastIncomplete.forEach(cb => {
+                if (backlogFound >= 2) return;
+                const label = cb.closest('.check-item').querySelector('.check-label').textContent;
+                const subjectName = cb.closest('.subject-row').querySelector('.subject-name').textContent;
+                weakHtml += `
+                    <div class="insight-item weak" onclick="switchTab('curriculum'); setTimeout(()=>cb.scrollIntoView({behavior:'smooth'}), 100);">
+                        <div class="insight-item-icon">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                        </div>
+                        <div class="insight-item-content">
+                            <div class="insight-item-title">${label}</div>
+                            <div class="insight-item-meta">${subjectName}</div>
+                        </div>
+                    </div>
+                `;
+                backlogFound++;
+            });
+        }
+        if (backlogFound === 0) {
+            weakHtml = `<div class="insight-desc">No major gaps identified in foundational topics. Keep going!</div>`;
+        }
+    } else {
+        weakHtml = `<div class="insight-desc">You are just getting started! No pending backlog.</div>`;
+    }
+
+    recsContainer.innerHTML = recsHtml;
+    weakContainer.innerHTML = weakHtml;
 }
 
 function getGroupPct(group) {
@@ -250,13 +617,14 @@ function getGroupPct(group) {
 }
 
 function resetProgress() {
-    if (confirm('Are you sure you want to reset recorded progress?')) {
-        localStorage.removeItem(STORAGE_KEY);
-        document.querySelectorAll('.check-input').forEach(cb => cb.checked = false);
-        updateAllProgress();
-        if (document.getElementById('pane-dashboard').classList.contains('active')) {
-            renderDashboardCharts();
+    if (confirm('Are you sure you want to reset ALL your progress, streak, and profile data? This cannot be undone.')) {
+        localStorage.clear();
+        // Also reset Firestore if logged in
+        const docRef = getUserDoc();
+        if (docRef) {
+            docRef.delete().catch(e => console.warn('Firestore reset error:', e));
         }
+        window.location.reload();
     }
 }
 
@@ -266,7 +634,8 @@ function resetProgress() {
 function renderDashboardCharts() {
     const isLight = document.documentElement.classList.contains('light');
     const textColor = isLight ? '#475569' : '#94a3b8';
-    const gridColor = isLight ? '#e2e8f0' : '#1e293b';
+    const gridColor = isLight ? '#e2e8f0' : 'rgba(30, 41, 59, 0.5)';
+    const surfaceColor = isLight ? '#ffffff' : '#0f172a';
 
     const labels = ['Pre', 'Sem 1', 'Sem 2', 'Sem 3', 'Sem 4', 'Sem 5', 'Sem 6', 'Sem 7', 'Sem 8', 'Co-Curr'];
     const groups = ['pre', 'sem1', 'sem2', 'sem3', 'sem4', 'sem5', 'sem6', 'sem7', 'sem8', 'cc'];
@@ -275,6 +644,12 @@ function renderDashboardCharts() {
     const chartCanvas1 = document.getElementById('semProgressChart');
     if (chartCanvas1) {
         const ctx1 = chartCanvas1.getContext('2d');
+        
+        // Create premium gradient for bars
+        const gradient = ctx1.createLinearGradient(0, 0, 0, 400);
+        gradient.addColorStop(0, isLight ? '#059669' : '#34d399');
+        gradient.addColorStop(1, isLight ? '#047857' : '#10b981');
+
         if (semChartInstance) semChartInstance.destroy();
 
         semChartInstance = new Chart(ctx1, {
@@ -284,8 +659,10 @@ function renderDashboardCharts() {
                 datasets: [{
                     label: 'Completion %',
                     data: data,
-                    backgroundColor: isLight ? '#059669' : '#10b981',
-                    borderRadius: 6,
+                    backgroundColor: gradient,
+                    borderRadius: 4,
+                    borderWidth: 0,
+                    barPercentage: 0.6,
                 }]
             },
             options: {
@@ -295,16 +672,23 @@ function renderDashboardCharts() {
                     y: {
                         beginAtZero: true,
                         max: 100,
-                        ticks: { color: textColor },
-                        grid: { color: gridColor }
+                        ticks: { color: textColor, padding: 10, font: { family: "'Inter', sans-serif", size: 11 } },
+                        grid: { color: gridColor, drawBorder: false }
                     },
                     x: {
-                        ticks: { color: textColor },
-                        grid: { display: false }
+                        ticks: { color: textColor, font: { family: "'Inter', sans-serif", size: 11 } },
+                        grid: { display: false, drawBorder: false }
                     }
                 },
                 plugins: {
-                    legend: { display: false }
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                        titleFont: { family: "'Inter', sans-serif", size: 13 },
+                        bodyFont: { family: "'Inter', sans-serif", size: 12 },
+                        padding: 12,
+                        cornerRadius: 8,
+                    }
                 }
             }
         });
@@ -326,17 +710,27 @@ function renderDashboardCharts() {
                         getGroupPct('sem5') + getGroupPct('sem6'),
                         getGroupPct('sem7') + getGroupPct('sem8') + getGroupPct('cc')
                     ],
-                    backgroundColor: ['#3b82f6', '#10b981', '#f59e0b', '#ec4899'],
-                    borderWidth: 0
+                    backgroundColor: ['#3b82f6', '#10b981', '#f59e0b', '#8b5cf6'],
+                    borderColor: surfaceColor,
+                    borderWidth: 3,
+                    hoverOffset: 4
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                cutout: '70%',
                 plugins: {
                     legend: {
                         position: 'bottom',
-                        labels: { color: textColor, boxWidth: 12, padding: 12 }
+                        labels: { color: textColor, boxWidth: 10, padding: 20, font: { family: "'Inter', sans-serif", size: 12 } }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                        titleFont: { family: "'Inter', sans-serif", size: 13 },
+                        bodyFont: { family: "'Inter', sans-serif", size: 12 },
+                        padding: 12,
+                        cornerRadius: 8,
                     }
                 }
             }
@@ -416,6 +810,7 @@ function getStudentProfile() {
 function saveStudentProfile(profile) {
     profile.onboardingComplete = true;
     localStorage.setItem(PROFILE_KEY, JSON.stringify(profile));
+    saveToFirestore(); // Sync to cloud if logged in
 }
 
 function openOnboarding() {
@@ -830,6 +1225,7 @@ function getDailyPlanData() {
 
 function saveDailyPlanData(data) {
     localStorage.setItem(PLAN_KEY, JSON.stringify(data));
+    saveToFirestore(); // Sync to cloud if logged in
 }
 
 function getStreakData() {
@@ -840,6 +1236,7 @@ function getStreakData() {
 
 function saveStreakData(data) {
     localStorage.setItem(STREAK_KEY, JSON.stringify(data));
+    saveToFirestore(); // Sync to cloud if logged in
 }
 
 function trackDailyActivity() {
@@ -868,6 +1265,194 @@ function trackDailyActivity() {
     }
 
     saveStreakData(streakData);
+    const navStreak = document.getElementById('navStreakCount');
+    if (navStreak) navStreak.textContent = streakData.streak || 0;
+}
+
+// ============================================================
+// PHASE 8: GAMIFICATION ENGINE (Confetti, Badges & Toasts)
+// ============================================================
+const UNLOCKED_BADGES_KEY = 'rgpv_unlocked_badges';
+
+const ACHIEVEMENTS_LIST = [
+    { id: 'first_step', name: 'First Step', desc: 'Complete your first milestone topic.', icon: '🚀' },
+    { id: 'streak_3', name: '3-Day Streak', desc: 'Maintain a 3-day active study streak.', icon: '🔥' },
+    { id: 'streak_7', name: '7-Day Streak Warrior', desc: 'Maintain a 7-day active study streak.', icon: '⚡' },
+    { id: 'core_master', name: 'Core CS Scholar', desc: 'Complete 50% or more of Core CS (Sem 3 & 4).', icon: '🧠' },
+    { id: 'sem_complete', name: 'Semester Champion', desc: 'Finish 100% of any academic semester.', icon: '🏆' },
+    { id: 'career_ready', name: 'Career Ready', desc: 'Complete 3 or more placement/career prep items.', icon: '💼' },
+    { id: 'halfway', name: 'Halfway Milestone', desc: 'Reach 50% total progress across the roadmap.', icon: '🎓' },
+    { id: 'polymath', name: 'Polymath Engineer', desc: 'Complete at least 50 milestone items.', icon: '⭐' }
+];
+
+function triggerConfetti() {
+    const canvas = document.getElementById('confettiCanvas');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const pieces = [];
+    const colors = ['#10b981', '#3b82f6', '#8b5cf6', '#f59e0b', '#ec4899', '#34d399', '#60a5fa'];
+
+    for (let i = 0; i < 120; i++) {
+        pieces.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height * 0.5 - canvas.height * 0.5,
+            size: Math.random() * 8 + 4,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            speedY: Math.random() * 3 + 2,
+            speedX: Math.random() * 4 - 2,
+            rotation: Math.random() * 360,
+            rotationSpeed: Math.random() * 10 - 5,
+            opacity: 1
+        });
+    }
+
+    let animationFrame;
+    const startTime = Date.now();
+
+    function render() {
+        const elapsed = Date.now() - startTime;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        let activePieces = 0;
+        pieces.forEach(p => {
+            p.y += p.speedY;
+            p.x += p.speedX;
+            p.rotation += p.rotationSpeed;
+            if (elapsed > 2000) p.opacity -= 0.02;
+
+            if (p.opacity > 0 && p.y < canvas.height) {
+                activePieces++;
+                ctx.save();
+                ctx.globalAlpha = Math.max(0, p.opacity);
+                ctx.translate(p.x, p.y);
+                ctx.rotate((p.rotation * Math.PI) / 180);
+                ctx.fillStyle = p.color;
+                ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+                ctx.restore();
+            }
+        });
+
+        if (activePieces > 0 && elapsed < 3500) {
+            animationFrame = requestAnimationFrame(render);
+        } else {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            if (animationFrame) cancelAnimationFrame(animationFrame);
+        }
+    }
+
+    render();
+}
+
+function showBadgeToast(badge) {
+    const container = document.getElementById('toastContainer');
+    if (!container) return;
+
+    const toast = document.createElement('div');
+    toast.className = 'badge-toast';
+    toast.innerHTML = `
+        <div class="badge-toast-icon">${badge.icon}</div>
+        <div class="badge-toast-content">
+            <div class="badge-toast-title">Achievement Unlocked!</div>
+            <div class="badge-toast-name">${badge.name}</div>
+            <div class="badge-toast-desc">${badge.desc}</div>
+        </div>
+    `;
+
+    container.appendChild(toast);
+    setTimeout(() => toast.classList.add('show'), 50);
+
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 400);
+    }, 4500);
+}
+
+function getUnlockedBadges() {
+    try {
+        return JSON.parse(localStorage.getItem(UNLOCKED_BADGES_KEY)) || [];
+    } catch (e) {
+        return [];
+    }
+}
+
+function saveUnlockedBadges(unlockedArray) {
+    localStorage.setItem(UNLOCKED_BADGES_KEY, JSON.stringify(unlockedArray));
+    saveToFirestore(); // Sync to cloud if logged in
+}
+
+function checkAchievements(totalChecked, totalItems) {
+    const unlocked = getUnlockedBadges();
+    const newlyUnlocked = [];
+
+    const streakData = getStreakData();
+    const streak = streakData.streak || 0;
+
+    const coreChecked = document.querySelectorAll('[data-group="sem3"] .check-input:checked, [data-group="sem4"] .check-input:checked').length;
+    const coreTotal = document.querySelectorAll('[data-group="sem3"] .check-input, [data-group="sem4"] .check-input').length;
+    const corePct = coreTotal > 0 ? Math.round((coreChecked / coreTotal) * 100) : 0;
+
+    const careerChecked = document.querySelectorAll('#pane-placement .check-input:checked').length;
+    const totalPct = totalItems > 0 ? Math.round((totalChecked / totalItems) * 100) : 0;
+
+    const groups = ['pre', 'sem1', 'sem2', 'sem3', 'sem4', 'sem5', 'sem6', 'sem7', 'sem8', 'cc'];
+    let anySemComplete = false;
+    groups.forEach(g => {
+        if (getGroupPct(g) === 100) anySemComplete = true;
+    });
+
+    ACHIEVEMENTS_LIST.forEach(badge => {
+        if (unlocked.includes(badge.id)) return;
+
+        let conditionMet = false;
+        if (badge.id === 'first_step' && totalChecked >= 1) conditionMet = true;
+        if (badge.id === 'streak_3' && streak >= 3) conditionMet = true;
+        if (badge.id === 'streak_7' && streak >= 7) conditionMet = true;
+        if (badge.id === 'core_master' && corePct >= 50) conditionMet = true;
+        if (badge.id === 'sem_complete' && anySemComplete) conditionMet = true;
+        if (badge.id === 'career_ready' && careerChecked >= 3) conditionMet = true;
+        if (badge.id === 'halfway' && totalPct >= 50) conditionMet = true;
+        if (badge.id === 'polymath' && totalChecked >= 50) conditionMet = true;
+
+        if (conditionMet) {
+            unlocked.push(badge.id);
+            newlyUnlocked.push(badge);
+        }
+    });
+
+    if (newlyUnlocked.length > 0) {
+        saveUnlockedBadges(unlocked);
+        newlyUnlocked.forEach(badge => showBadgeToast(badge));
+        triggerConfetti();
+    }
+
+    renderBadgesGrid();
+}
+
+function renderBadgesGrid() {
+    const container = document.getElementById('achievementsGrid');
+    const countEl = document.getElementById('achievementsCount');
+    if (!container) return;
+
+    const unlocked = getUnlockedBadges();
+    if (countEl) countEl.textContent = `${unlocked.length}/${ACHIEVEMENTS_LIST.length} Unlocked`;
+
+    container.innerHTML = ACHIEVEMENTS_LIST.map(badge => {
+        const isUnlocked = unlocked.includes(badge.id);
+        return `
+            <div class="badge-card ${isUnlocked ? 'unlocked' : 'locked'}">
+                <div class="badge-card-icon">${badge.icon}</div>
+                <div class="badge-card-info">
+                    <div class="badge-card-title">${badge.name}</div>
+                    <div class="badge-card-desc">${badge.desc}</div>
+                    <div class="badge-card-status">${isUnlocked ? '✓ Unlocked' : '🔒 Locked'}</div>
+                </div>
+            </div>
+        `;
+    }).join('');
 }
 
 function generateTodaysTasks() {
@@ -1376,6 +1961,11 @@ window.addEventListener('DOMContentLoaded', () => {
     } else {
         applyStudentProfile();
     }
+
+    // Firebase Auth listener — fires on every page load
+    if (firebaseAuth) {
+        firebaseAuth.onAuthStateChanged(onAuthStateChanged);
+    }
 });
 
 // ============================================================
@@ -1401,4 +1991,152 @@ function applyResourceHierarchy() {
             }
         });
     });
+}
+
+// ============================================================
+// FEEDBACK FEATURE HANDLERS (RISING BRAIN STYLE POP-UP)
+// ============================================================
+let selectedFeedbackRating = 0;
+
+function openFeedbackModal() {
+    const overlay = document.getElementById('feedbackOverlay');
+    if (overlay) overlay.classList.add('active');
+}
+
+function closeFeedbackModal() {
+    const overlay = document.getElementById('feedbackOverlay');
+    if (overlay) overlay.classList.remove('active');
+}
+
+function closeFeedbackOnOverlay(e) {
+    if (e.target.id === 'feedbackOverlay') {
+        closeFeedbackModal();
+    }
+}
+
+function setFeedbackRating(stars) {
+    selectedFeedbackRating = stars;
+    const starEls = document.querySelectorAll('#starRating .star');
+    starEls.forEach(el => {
+        const val = parseInt(el.dataset.rating, 10);
+        if (val <= stars) {
+            el.classList.add('selected');
+        } else {
+            el.classList.remove('selected');
+        }
+    });
+}
+
+function formatFeedbackText(command) {
+    const textarea = document.getElementById('feedbackMessage');
+    if (!textarea) return;
+
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const selectedText = textarea.value.substring(start, end) || 'text';
+    let formatted = '';
+
+    switch (command) {
+        case 'bold': formatted = `**${selectedText}**`; break;
+        case 'italic': formatted = `*${selectedText}*`; break;
+        case 'strike': formatted = `~~${selectedText}~~`; break;
+        case 'h2': formatted = `\n## ${selectedText}\n`; break;
+        case 'h3': formatted = `\n### ${selectedText}\n`; break;
+        case 'list': formatted = `\n- ${selectedText}`; break;
+        case 'code': formatted = `\`${selectedText}\``; break;
+        case 'quote': formatted = `\n> ${selectedText}\n`; break;
+        default: formatted = selectedText;
+    }
+
+    textarea.value = textarea.value.substring(0, start) + formatted + textarea.value.substring(end);
+    textarea.focus();
+}
+
+async function submitFeedback() {
+    const textarea = document.getElementById('feedbackMessage');
+    const sendBtn = document.getElementById('sendFeedbackBtn');
+    if (!textarea) return;
+
+    const message = textarea.value.trim();
+    if (!message) {
+        alert('Please enter your feedback before submitting.');
+        textarea.focus();
+        return;
+    }
+
+    sendBtn.disabled = true;
+    sendBtn.innerHTML = `
+        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="animation: spin 1s linear infinite;">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m0 14v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+        </svg>
+        Sending...
+    `;
+
+    const payload = {
+        _subject: "New Feedback - RGPV BTech CSE Roadmap",
+        _captcha: "false",
+        rating: selectedFeedbackRating ? `${selectedFeedbackRating} / 5 Stars` : "Not rated",
+        message: message,
+        timestamp: new Date().toLocaleString(),
+        user_agent: navigator.userAgent
+    };
+
+    try {
+        await fetch("https://formsubmit.co/ajax/mihirchouhan626014@gmail.com", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify(payload)
+        });
+
+        // Save locally as backup
+        const savedFeedbacks = JSON.parse(localStorage.getItem('rgpv_submitted_feedbacks') || '[]');
+        savedFeedbacks.push(payload);
+        localStorage.setItem('rgpv_submitted_feedbacks', JSON.stringify(savedFeedbacks));
+
+        // Trigger Toast & Celebration Confetti
+        if (typeof showBadgeToast === 'function') {
+            showBadgeToast({
+                icon: '💬',
+                name: 'Feedback Received!',
+                desc: 'Thank you for helping us improve the RGPV Roadmap.'
+            });
+        }
+        if (typeof triggerConfetti === 'function') {
+            triggerConfetti();
+        }
+
+        // Reset form
+        textarea.value = '';
+        setFeedbackRating(0);
+        closeFeedbackModal();
+    } catch (error) {
+        // Local fallback if offline
+        const savedFeedbacks = JSON.parse(localStorage.getItem('rgpv_submitted_feedbacks') || '[]');
+        savedFeedbacks.push(payload);
+        localStorage.setItem('rgpv_submitted_feedbacks', JSON.stringify(savedFeedbacks));
+
+        if (typeof showBadgeToast === 'function') {
+            showBadgeToast({
+                icon: '💬',
+                name: 'Feedback Saved!',
+                desc: 'Thank you! Your feedback has been recorded.'
+            });
+        }
+        if (typeof triggerConfetti === 'function') {
+            triggerConfetti();
+        }
+
+        textarea.value = '';
+        setFeedbackRating(0);
+        closeFeedbackModal();
+    } finally {
+        sendBtn.disabled = false;
+        sendBtn.innerHTML = `
+            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+            Send feedback
+        `;
+    }
 }
